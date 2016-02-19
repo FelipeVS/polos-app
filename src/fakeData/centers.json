@@ -1,0 +1,125 @@
+[{
+  "id": 0,
+  "name": "Polo Paraty",
+  "state": "RJ",
+  "city": "Paraty",
+  "neighborhoods": null,
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/business/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": "http://www.poloParaty.com.br",
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-23.220253",
+  "lng": "-44.715852",
+  "distance":319.52,
+  "restaurants": 26
+},
+{
+  "id": 1,
+  "name": "Polo Lido",
+  "state": "RJ",
+  "city": "Rio de Janeiro",
+  "neighborhoods": {
+                      "neighborhood": "Copacabana"
+                    },
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/nature/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": "http://www.poloLido.com.br",
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-22.949631",
+  "lng": "-43.184289",
+  "distance":9.12,
+  "restaurants": 18
+},
+{
+  "id": 2,
+  "name": "Polo Rio Antigo",
+  "state": "RJ",
+  "city": "Rio de Janeiro",
+  "neighborhoods": {
+                      "neighborhood": "Centro",
+                      "neighborhood": "Lapa"
+                    },
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/nightlife/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": null,
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-22.912139",
+  "lng": "-43.182653",
+  "distance":0.15,
+  "restaurants": 36
+},
+{
+  "id": 3,
+  "name": "Polo Cidade Nova",
+  "state": "RJ",
+  "city": "Rio de Janeiro",
+  "neighborhoods": {
+                      "neighborhood": "Cidade Nova",
+                      "neighborhood": "Estácio",
+                      "neighborhood": "Cachambi"
+                    },
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/food/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": null,
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-22.912995",
+  "lng": "-43.204670",
+  "distance":3.20,
+  "restaurants": 14
+},
+{
+  "id": 4,
+  "name": "Polo Botafogo",
+  "state": "RJ",
+  "city": "Rio de Janeiro",
+  "neighborhoods": {
+                      "neighborhood": "Botafogo"
+                    },
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/city/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": null,
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-22.94963",
+  "lng": "-43.184289",
+  "distance":4.51,
+  "restaurants": 48
+},
+{
+  "id": 5,
+  "name": "Polo Niterói",
+  "state": "RJ",
+  "city": "Niterói",
+  "neighborhoods": {
+                      "neighborhood": "Icaraí",
+                      "neighborhood": "São Francisco",
+                      "neighborhood": "Gragoatá",
+                      "neighborhood": "Charitas"
+                    },
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras finibus vehicula mollis. Nam lobortis quis ipsum non consectetur. Morbi maximus id est vel malesuada. Etiam bibendum pretium nulla ac imperdiet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi sed porta erat. Integer dignissim sapien sed orci egestas suscipit. Curabitur odio sem, semper a placerat in, consectetur quis purus.",
+  "photoUrl": "http://lorempixel.com/200/200/fashion/",
+  "openHours": "segunda a sexta, 12h as 14h",
+  "phone": "21 1234-5678",
+  "homepage": null,
+  "created": "20-03-2016 17:30",
+  "updated": null,
+  "lat": "-22.907007",
+  "lng": "-43.106596",
+  "distance":7.10,
+  "restaurants": 61
+}
+]

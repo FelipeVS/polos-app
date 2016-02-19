@@ -1,0 +1,14 @@
+<ion-view view-title="{{getNewsListTitle()}}">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="news in vm.news" type="item-text-wrap" href="#/tab/news/{{news.id}}">
+        <img ng-src="{{news.photoUrl}}">
+        <h2>{{news.title}}</h2>
+        <p>{{news.caption}}</p>
+        <i class="ion-clock" ng-hide="{{!news.expire}}"> Data do evento: {{news.expire}}</i>
+
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

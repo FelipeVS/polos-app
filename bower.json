@@ -1,0 +1,11 @@
+{
+    "name": "PolosGourmet",
+    "private": "true",
+    "devDependencies": {
+        "ionic": "driftyco/ionic-bower#1.2.1",
+        "angular-mocks": "~1.4.3"
+    },
+    "dependencies": {
+        "angular-messages": "~1.4.3"
+    }
+}

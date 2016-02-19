@@ -1,47 +1,60 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+ANDROID / ECLIPSE
 
-# Folder config file
-Desktop.ini
+# built application files
+*.apk
+*.ap_
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# files for the dex VM
+*.dex
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Java class files
+*.class
 
-# Windows shortcuts
-*.lnk
+# generated files - android project subfolder
+android/bin/
+android/gen/
+android/assets/
 
-# =========================
-# Operating System Files
-# =========================
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IOS / Xcode
+build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+*.moved-aside
+ios/www/
 
 # OSX
-# =========================
-
 .DS_Store
-.AppleDouble
-.LSOverride
 
 # Thumbnails
 ._*
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
+# Files that might appear on external disk
 .Spotlight-V100
-.TemporaryItems
 .Trashes
-.VolumeIcon.icns
+*.db
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+node_modules/
+src/lib/
+src/.tmp/
+platforms/
+www/
+www/*
+
+.sass-cache
+.sass-cache/*
