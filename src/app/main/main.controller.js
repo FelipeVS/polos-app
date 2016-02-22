@@ -13,15 +13,23 @@
 
         activate();
 
+        vm.saveCenter = saveCenter;
+
         ////////////////
 
         function activate() {
-            console.log(URL);
-            return CentersService.all().then(function(data) {
-                console.log(data);
+            vm.mapCenter = {
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 8
+            }
+            return CentersService.getAll().then(function(data) {
                 vm.centers = data;
-                return vm.centers;
             });
+        }
+
+        function saveCenter(center) {
+            CentersService.saveCenter(center);
         }
     }
 })();

@@ -4,13 +4,14 @@
     angular
     .module('app.core', [
         /* Angular modules */
-        // 'ngResource',
-        // 'ngMessages',
+        'pascalprecht.translate',
+        '720kb.fx',
+        'leaflet-directive'
 
         /* Cross-app module */
         // 'my.appModule',
 
         /* 3rd party modules */
-        // 'firebase'
+
     ]);
 })();

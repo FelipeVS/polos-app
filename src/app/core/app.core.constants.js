@@ -3,6 +3,6 @@
 
     angular
     .module('app.core')
-    .constant('URL', '../../fakeData/');
+    .constant('serverUrl', '../../fakeData/');
 
 })();

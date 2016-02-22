@@ -11,7 +11,7 @@
         $stateProvider
 
         .state('tab.restaurants', {
-            url: '/restaurants',
+            url: '/restaurants/:centerId',
             views: {
                 'tab-restaurants': {
                     templateUrl: 'app/restaurants/restaurants.html',

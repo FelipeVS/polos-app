@@ -5,13 +5,13 @@
     .module('app.services')
     .factory('NewsService', newsService);
 
-    newsService.$inject = ['$http', '$q'];
+    newsService.$inject = ['$http', '$q', 'serverUrl'];
 
     // Some fake testing data
     var news = [];
 
     /* @ngInject */
-    function newsService($http, $q) {
+    function newsService($http, $q, serverUrl) {
         var service = {
             all: all,
             remove: remove,
@@ -22,7 +22,7 @@
         ////////////////
 
         function all() {
-            return $http.get('../../fakeData/news.json')
+            return $http.get(serverUrl + 'news.json')
               .then(getNewsComplete)
               .catch(getNewsFailed);
 

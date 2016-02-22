@@ -5,23 +5,25 @@
     .module('app.services')
     .factory('CentersService', centersService);
 
-    centersService.$inject = ['$http', '$q'];
+    centersService.$inject = ['$http', '$q', 'serverUrl'];
 
     var centers = [];
 
     /* @ngInject */
-    function centersService($http, $q) {
+    function centersService($http, $q, serverUrl) {
         var service = {
-            all: all,
-            remove: remove,
-            get: get
+            getAll: getAll,
+            saveCenter: saveCenter,
+            getCenter: getCenter
         };
+        var center;
+
         return service;
 
         ////////////////
 
-        function all() {
-            return $http.get(URL + 'centers.json')
+        function getAll() {
+            return $http.get(serverUrl + 'centers.json')
               .then(getCentersComplete)
               .catch(getCentersFailed);
 
@@ -35,17 +37,15 @@
             }
         }
 
-        function remove(centers) {
-            centers.splice(centers.indexOf(centers), 1);
+        function saveCenter (selected) {
+            console.log('Saving center to later:', selected);
+            center = selected;
         }
 
-        function get(centersId) {
-            for (var i = 0; i < centers.length; i++) {
-                if (parseInt(centers[i].id) === parseInt(centersId)) {
-                    return centers[i];
-                }
-            }
-            return null;
+        function getCenter () {
+            console.log('Getting center');
+            return center;
         }
+
     }
 })();

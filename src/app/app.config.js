@@ -5,10 +5,19 @@
     .module('app')
     .config(configure);
 
-    configure.$inject = [];
+    configure.$inject = ['$translateProvider'];
 
-    function configure () {
+    function configure ($translateProvider) {
         // Add your configuration here
+        $translateProvider.translations('en', {
+            MainTitle: 'Hello',
+        });
+        $translateProvider.translations('pt-BR', {
+            MainTitle: 'Hallo',
+        });
+        $translateProvider.translations('es', {
+            MainTitle: 'Hallo',
+        });
+        $translateProvider.preferredLanguage('en');
     }
-
 })();
