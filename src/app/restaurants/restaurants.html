@@ -1,6 +1,9 @@
 <ion-view title="{{vm.center.name}}">
-  <ion-nav-back-button>
-  </ion-nav-back-button>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-chevron-left" ng-click="vm.backToCenters()"></button>
+  </ion-nav-buttons>
+
   <ion-nav-buttons side="right">
     <button class="button button-icon icon ion-chatbubbles" ng-click="openLanguageList($event)"></button>
   </ion-nav-buttons>
@@ -29,10 +32,10 @@
           {{vm.center.homepage}}
         </a>
 
-        <p class="description_container" ng-class="{show_more: vm.showMoreInfo}">{{vm.center.text}}
+        <p class="description_container" ng-class="{show_more: vm.isMoreInfoShown}">{{vm.center.text}}
 
         </p>
-        <button class="button button-small button-full icon" ng-class="{'ion-minus': vm.showMoreInfo, 'ion-plus': !vm.showMoreInfo }" ng-click="vm.showInfo()"></button>
+        <button class="button button-small button-full icon" ng-class="{'ion-minus': vm.isMoreInfoShown, 'ion-plus': !vm.isMoreInfoShown }" ng-click="vm.showInfo()"></button>
 
       </div>
     </div>
