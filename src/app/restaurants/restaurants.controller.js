@@ -5,13 +5,14 @@
     .module('app.main')
     .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate'];
+    RestaurantsController.$inject = ['CentersService', 'RestaurantsService', 'PopoverService', '$ionicHistory', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function RestaurantsController(CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate) {
+    function RestaurantsController(CentersService, RestaurantsService, PopoverService, $ionicHistory, $ionicScrollDelegate) {
         var vm = this;
 
         vm.backToCenters = backToCenters;
+        vm.openLanguageList = openLanguageList;
         vm.isMoreInfoShown = false;
         vm.showInfo = showInfo;
         vm.toggleGroup = toggleGroup;
@@ -23,20 +24,21 @@
         ////////////////
 
         function activate() {
+            vm.center = CentersService.getCenter();
             vm.mapCenter = {
-                lat: 51.505,
-                lng: -0.09,
+                lat: vm.center.lat,
+                lng: vm.center.lng,
                 zoom: 8
             }
-            vm.center = CentersService.getCenter();
-            return RestaurantsService.getAll().then(function(data) {
-                vm.restaurants = data;
-            }).catch(function(error) {
-            });
+            vm.restaurants = RestaurantsService.getRestaurants();
         }
 
         function backToCenters() {
             $ionicHistory.goBack();
+        }
+
+        function openLanguageList($event) {
+            console.log('This will open a popover')
         }
 
         function showInfo() {

@@ -9,7 +9,7 @@
 
   <ion-content >
     <div id="map">
-      <leaflet lf-center="vm.mapCenter" markers="vm.markers" height="100%" width="100%"></leaflet>
+      <leaflet lf-center="vm.mapCenter" markers="vm.centers" event-broadcast="vm.events" height="100%" width="100%"></leaflet>
     </div>
 
 
@@ -32,7 +32,7 @@
        <!-- | orderBy:'distance' -->
       <ion-item class="item-thumbnail-left item-icon-right" collection-repeat="center in vm.centers" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" nav-direction="forward">
         <img class="media-object pull-left" ng-src={{center.photoUrl}} width="80" height="80">
-        <h2 class="text-bold">{{center.name}}</h2>
+        <h2 class="text-bold">{{center.title}}</h2>
         <i class="ion-location"></i> {{center.distance}} km
         <span class="badge badge-assertive">{{center.restaurants}}</span>
         <i class="icon ion-arrow-right-c"></i>

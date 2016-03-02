@@ -5,29 +5,37 @@
     .module('app.services')
     .factory('NewsService', newsService);
 
-    newsService.$inject = ['$http', '$q', 'serverUrl'];
+    newsService.$inject = ['$http', '$q', 'serverUrl', 'CentersService'];
 
     // Some fake testing data
     var news = [];
 
     /* @ngInject */
-    function newsService($http, $q, serverUrl) {
+    function newsService($http, $q, serverUrl, CentersService) {
         var service = {
-            all: all,
-            remove: remove,
-            get: get
+            getAll: getAll,
+            getNews: getNews,
+            saveSelected: saveSelected,
+            getSelected: getSelected
         };
+        var news = [];
+        var selectedNews = {};
+
         return service;
 
         ////////////////
 
-        function all() {
-            return $http.get(serverUrl + 'news.json')
+        function getAll() {
+            var centerParam = CentersService.getCenter();
+            return $http.get(serverUrl + 'news', {
+                params: {center: centerParam.title},
+            })
               .then(getNewsComplete)
               .catch(getNewsFailed);
 
             function getNewsComplete(response) {
                 news = response.data;
+                console.log(news);
                 return news;
             }
 
@@ -36,17 +44,16 @@
             }
         }
 
-        function remove(news) {
-            news.splice(news.indexOf(news), 1);
+        function getNews() {
+            return news;
         }
 
-        function get(newsId) {
-            for (var i = 0; i < news.length; i++) {
-                if (parseInt(news[i].id) === parseInt(newsId)) {
-                    return news[i];
-                }
-            }
-            return null;
+        function saveSelected(x) {
+            selectedNews = x
+        }
+
+        function getSelected() {
+            return selectedNews
         }
     }
 })();

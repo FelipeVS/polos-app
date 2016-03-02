@@ -23,7 +23,7 @@
         ////////////////
 
         function getAll() {
-            return $http.get(serverUrl + 'centers.json')
+            return $http.get(serverUrl + 'centers')
               .then(getCentersComplete)
               .catch(getCentersFailed);
 

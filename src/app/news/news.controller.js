@@ -5,26 +5,24 @@
     .module('app.news')
     .controller('NewsController', NewsController);
 
-    NewsController.$inject = ['NewsService'];
+    NewsController.$inject = ['NewsService', 'CentersService'];
 
     /* @ngInject */
-    function NewsController(NewsService) {
+    function NewsController(NewsService, CentersService) {
         var vm = this;
-        vm.remove = remove;
+        vm.newsDetail = newsDetail;
 
         activate();
 
         ////////////////
 
         function activate() {
-            return NewsService.all().then(function(data) {
-                vm.news = data;
-                return vm.news;
-            });
+            vm.center = CentersService.getCenter();
+            vm.news = NewsService.getNews();
         }
 
-        function remove(news) {
-            NewsService.remove(news);
+        function newsDetail(news) {
+            NewsService.saveSelected(news);
         }
 
     }

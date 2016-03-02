@@ -5,24 +5,33 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['CentersService'];
+    MainController.$inject = ['$scope', 'CentersService', 'RestaurantsService', 'NewsService'];
 
     /* @ngInject */
-    function MainController(CentersService) {
+    function MainController($scope, CentersService, RestaurantsService, NewsService) {
         var vm = this;
+        vm.mapCenter = {
+            lat: -23.374004,
+            lng: -43.890359,
+            zoom: 7
+        }
+        vm.events = {
+            map: {
+              enable: ['locationfound'],
+              logic: 'emit'
+            }
+        }
+        vm.saveCenter = saveCenter;
+
+        $scope.$on('leafletDirectiveMap.locationfound', function(event){
+            vm.eventDetected = "LocationFound";
+        });
 
         activate();
-
-        vm.saveCenter = saveCenter;
 
         ////////////////
 
         function activate() {
-            vm.mapCenter = {
-                lat: 51.505,
-                lng: -0.09,
-                zoom: 8
-            }
             return CentersService.getAll().then(function(data) {
                 vm.centers = data;
             });

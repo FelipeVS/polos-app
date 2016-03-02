@@ -12,7 +12,15 @@
         .state('tab', {
             url: '/tab',
             abstract: true,
-            templateUrl: 'app/layout/tabs.html'
+            templateUrl: 'app/layout/tabs.html',
+            resolve: {
+                restaurants: function(RestaurantsService) {
+                    return RestaurantsService.getAll();
+                },
+                news: function(NewsService) {
+                    return NewsService.getAll();
+                }
+            }
         });
     }
 

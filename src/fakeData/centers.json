@@ -11,8 +11,8 @@
   "homepage": "http://www.poloParaty.com.br",
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-23.220253",
-  "lng": "-44.715852",
+  "lat": -23.220253,
+  "lng": -44.715852,
   "distance":319.52,
   "restaurants": 26
 },
@@ -31,8 +31,8 @@
   "homepage": "http://www.poloLido.com.br",
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-22.949631",
-  "lng": "-43.184289",
+  "lat": -22.949631,
+  "lng": -43.184289,
   "distance":9.12,
   "restaurants": 18
 },
@@ -52,8 +52,8 @@
   "homepage": null,
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-22.912139",
-  "lng": "-43.182653",
+  "lat": -22.912139,
+  "lng": -43.182653,
   "distance":0.15,
   "restaurants": 36
 },
@@ -74,8 +74,8 @@
   "homepage": null,
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-22.912995",
-  "lng": "-43.204670",
+  "lat": -22.912995,
+  "lng": -43.204670,
   "distance":3.20,
   "restaurants": 14
 },
@@ -94,8 +94,8 @@
   "homepage": null,
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-22.94963",
-  "lng": "-43.184289",
+  "lat": -22.94963,
+  "lng": -43.184289,
   "distance":4.51,
   "restaurants": 48
 },
@@ -117,8 +117,8 @@
   "homepage": null,
   "created": "20-03-2016 17:30",
   "updated": null,
-  "lat": "-22.907007",
-  "lng": "-43.106596",
+  "lat": -22.907007,
+  "lng": -43.106596,
   "distance":7.10,
   "restaurants": 61
 }

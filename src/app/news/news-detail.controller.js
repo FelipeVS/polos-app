@@ -15,7 +15,7 @@
         ////////////////
 
         function activate() {
-            vm.singleNews = NewsService.get($stateParams.newsId);
+            vm.singleNews = NewsService.getSelected();
         }
     }
 })();

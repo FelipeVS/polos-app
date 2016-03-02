@@ -3,6 +3,6 @@
 
     angular
     .module('app.core')
-    .constant('serverUrl', '../../fakeData/');
+    .constant('serverUrl', 'http://localhost:3000/');
 
 })();

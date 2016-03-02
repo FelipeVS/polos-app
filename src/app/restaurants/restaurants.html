@@ -1,17 +1,17 @@
-<ion-view title="{{vm.center.name}}">
+<ion-view title="{{vm.center.title}}">
 
   <ion-nav-buttons side="left">
     <button class="button button-icon icon ion-chevron-left" ng-click="vm.backToCenters()"></button>
   </ion-nav-buttons>
 
   <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-chatbubbles" ng-click="openLanguageList($event)"></button>
+    <button class="button button-icon icon ion-chatbubbles" ng-click="vm.openLanguageList($event)"></button>
   </ion-nav-buttons>
 
   <ion-content>
 
     <div id="map">
-      <leaflet lf-center="vm.mapCenter" markers="vm.markers" height="100%" width="100%"></leaflet>
+      <leaflet lf-center="vm.mapCenter" markers="vm.restaurants" height="100%" width="100%"></leaflet>
     </div>
 
     <div id="more_info" class="subsection">
@@ -45,7 +45,7 @@
     <div class="list list-inset list-rounded" ng-repeat="restaurant in vm.restaurants">
       <div class="item-header item item-icon-right" ng-click="vm.toggleGroup(restaurant)" ng-class="{active: vm.isGroupShown(restaurant)}">
         <img class="icon" src="images\m4t.png" style="padding:7px;" ng-hide="!restaurant.M4T">
-        <h3 class="iten-text-wrap text-bold">{{restaurant.name}}</h3>
+        <h3 class="iten-text-wrap text-bold">{{restaurant.title}}</h3>
       </div>
       <!-- EXPANDABLE AREA -->
       <div class="item item-stable item-accordion note note-rounded" ng-show="vm.isGroupShown(restaurant)" ngfx-fade-in="vm.isGroupShown(restaurant)" ngfx-fade-out="!vm.isGroupShown(restaurant)">

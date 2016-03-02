@@ -12,19 +12,19 @@
 
         var service = {
             getAll: getAll,
-            getSelected: getSelected
+            getRestaurants: getRestaurants
         };
         var restaurants = [];
         var selectedCenter;
 
         return service;
 
-        function getAll(centerParam) {
-            console.log(centerParam);
-            // if (!selectedCenter) {
-            //     getSelectedCenter();
-            // }
-            return $http.get(serverUrl + 'restaurants.json')
+        function getAll() {
+            var centerParam = CentersService.getCenter();
+
+            return $http.get(serverUrl + 'restaurants', {
+                params: {center: centerParam.title},
+            })
               .then(getRestaurantsComplete)
               .catch(getRestaurantsFailed);
 
@@ -39,7 +39,7 @@
             }
         }
 
-        function getSelected() {
+        function getRestaurants() {
             return restaurants;
         }
 
