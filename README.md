@@ -1,142 +1,83 @@
-This is an alternative project structure for the [Ionic Framework](http://ionicframework.com/) demonstrated with the ionic tabs starter.
+# Ionic Starter
 
-## How to use this project
+[![Dependency Status](https://david-dm.org/loicknuchel/ionic-starter.svg)](https://david-dm.org/loicknuchel/ionic-starter)
+[![devDependency Status](https://david-dm.org/loicknuchel/ionic-starter/dev-status.svg)](https://david-dm.org/loicknuchel/ionic-starter#info=devDependencies)
 
-To use this starter create a new project folder (e.g. 'myApp') for your app and clone this repository into it.
-```bash
-$ cd mkdir myApp
-$ git clone https://github.com/flavordaaave/ionic_better_structure.git
-```
+This project aims to let you start a new app as fast as possible.
 
-Then run npm and bower to get all needed dependencies:
+Just clone it and you are ready to do ! Many boilerplate code is already written and most usefull libs are included. I'm trying to follow best practices with Angular & Ionic so it could be a good kick start :)
 
-```bash
-$ npm install
-$ bower install
-```
+Feel free to open an issue for any question or suggestion you could have.
 
-## How this project is structured
+This application (mostly) follows the [John Papa's style guide](https://github.com/johnpapa/angular-styleguide).
 
-All working files are underneath the 'src' folder trying to follow the [angular styleguide](https://github.com/johnpapa/angular-styleguide) created by [johnpapa](https://github.com/johnpapa).
+## Getting started
 
-    /src
-        /app
-        /images
-        /lib
-        /styles
-        index.html
+- install nodejs, npm, gulp, bower, cordova, ionic & sass (if not already done)
+- `git clone git@github.com:loicknuchel/ionic-starter.git` : clone this repo
+- `cd ionic-starter` : go to folder
+- `bower install` : install app dependencies
+- `npm install` : install build dependencies
+- `ionic setup sass` : use sass
+- `ionic serve` : start the app on your browser
 
+For the impatients, you can run all these commands in one time : `git clone git@github.com:loicknuchel/ionic-starter.git && cd ionic-starter && bower install && npm install && ionic setup sass && ionic serve`
 
-Everything is set up to serve from this src folder using
-```bash
-$ ionic serve
-```
+To run the app on your android device :
 
-## Build process
+- `ionic platform add android` : add android platform to the project
+- `ionic resources` : generate icon & splash-screen for project platforms
+- `ionic run android` : run your app !
 
-This project comes with a before_build hook to run the 'gulp build' task before actually building the app with cordova. The 'gulp build' task concatenates, minifies and copies the files into the 'www' folder from where cordova is loading the files. So you can just use the standard ionic build commands:
+Once again, in one command : `ionic platform add android && ionic resources && ionic run android`
 
-```bash
-$ ionic platform add ios
-$ ionic build ios
-$ ionic emulate ios
-```
+## Personnalize
 
-## Included gulp tasks
+As it's only a template project, you may want to change its name. For that, you just have to open :
 
-A bunch of useful gulp tasks have been copied from the [HotTowel yeoman generator](https://github.com/johnpapa/generator-hottowel) created by [johnpapa](https://github.com/johnpapa) and modified to work with ionic.
+- `config.xml` (widget id, name, description & author)
+- `www/index.html` (title)
+- `bower.json` (name, homepage, author & description)
+- `package.json` (name & description)
+- `ionic.project` (name)
 
-### Task Listing
+## Used versions
 
-- `gulp help`
+- Node v4.2.2 (`node -v`)
+- Cordova 5.4.0 (`cordova -version`)
+- Bower 1.7.0 (`bower -v`)
+- Angular 1.4.3 (see bower.json)
+- Ionic 1.2.0 (see bower.json)
 
-    Displays all of the available gulp tasks.
+## Infos
 
-### Code Analysis
+### Browser development
 
-- `gulp vet`
+- Chrome cordova : https://chrome.google.com/webstore/detail/cordova-mocks/iigcccneenmnplhhfhaeahiofeeeifpn (https://github.com/pbernasconi/chrome-cordova)
 
-    Performs static code analysis on all javascript files. Runs jshint and jscs.
+### Android debug
 
-- `gulp vet --verbose`
+- android remote debug : https://developer.chrome.com/devtools/docs/remote-debugging
+- activate developer mode on android
 
-    Displays all files affected and extended information about the code analysis.
+### Specific urls
 
-### Testing
+Use these custom urls to open other apps using inappbrowser (org.apache.cordova.inappbrowser)
 
-- `gulp test`
+- "tel:0123456789" => call this number
+- "sms:0123456789?body=coucou" => send sms to this number
+- "geo:lat,lon" => open google map to this geoloc
+- "mailto:toto@example.com" => send an email
+- "market:???"
 
-    Runs all unit tests using karma runner & jasmine with phantomjs. Depends on vet task, for code analysis.
+see http://stackoverflow.com/questions/26271313/tel-sms-and-mailto-no-longer-working-in-android-after-upgrading-to-cordo
 
-### Cleaning Up
+### Other links
 
-- `gulp clean`
-
-    Remove all files from the build and temp folders
-
-- `gulp clean-images`
-
-    Remove all images from the build folder
-
-- `gulp clean-code`
-
-    Remove all javascript and html from the build folder
-
-- `gulp clean-fonts`
-
-    Remove all fonts from the build folder
-
-- `gulp clean-styles`
-
-    Remove all styles from the temp and build folders
-
-### Fonts and Images
-
-- `gulp fonts`
-
-    Copy the ionic fonts from source to the build folder
-
-- `gulp images`
-
-    Copy all images from source to the build folder
-
-### Styles
-
-- `gulp styles`
-
-    Compile less files to CSS and copy to the build folder
-
-### Lib Files
-
-- `gulp wiredep`
-
-    Looks up all bower components' main files and JavaScript source code, then adds them to the `index.html`.
-
-    The `.bowerrc` file also runs this as a postinstall task whenever `bower install` is run.
-
-### Angular HTML Templates
-
-- `gulp templatecache`
-
-    Create an Angular module that adds all HTML templates to Angular's $templateCache. This pre-fetches all HTML templates saving XHR calls for the HTML.
-
-- `gulp templatecache --verbose`
-
-    Displays all files affected by the task.
-
-### Serving Development Code
-
-- `ionic serve`
-
-    You can us the standard ionic serve task here. 
-
-
-### Building Production Code
-
-- `gulp optimize`
-
-    Optimize all javascript and styles, move to a build folder, and inject them into the new index.html
-
-- `gulp build`
-
-    Copies the ionic fonts, copies images and runs `gulp optimize` to build the production code to the build folder.
+- Push
+    - https://github.com/hollyschinsky/PushNotificationSample
+- Unit test
+    - https://bradb.net/unit-testing-with-the-ionic-framework/
+    - http://forum.ionicframework.com/t/ionic-and-karma-unittest/8799
+- Data
+    - PouchDB (http://devgirl.org/2014/12/30/sync-data-using-pouchdb-in-your-ionic-framework-app/)

@@ -1,24 +1,24 @@
 {
-    "cordova-plugin-dialogs": {
+    "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-dialogs"
+            "id": "cordova-plugin-device@~1.1.0"
         },
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-inappbrowser": {
+    "cordova-plugin-console": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inappbrowser"
+            "id": "cordova-plugin-console@~1.0.2"
         },
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-network-information": {
+    "cordova-plugin-whitelist": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-network-information"
+            "id": "cordova-plugin-whitelist@~1.2.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -26,7 +26,7 @@
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-splashscreen"
+            "id": "cordova-plugin-splashscreen@~3.0.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -34,7 +34,39 @@
     "cordova-plugin-statusbar": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-statusbar"
+            "id": "cordova-plugin-statusbar@~2.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "ionic-plugin-keyboard": {
+        "source": {
+            "type": "registry",
+            "id": "ionic-plugin-keyboard@~1.0.8"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-x-toast": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-x-toast@~2.3.1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-storage": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-storage@~0.7.14"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser@~1.1.1"
         },
         "is_top_level": true,
         "variables": {}

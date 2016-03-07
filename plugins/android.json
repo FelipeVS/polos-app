@@ -1,0 +1,39 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        }
+    },
+    "dependent_plugins": {}
+}

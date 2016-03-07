@@ -1,6 +1,3 @@
 {
-    "directory": "src/lib",
-    "scripts": {
-        "postinstall": "gulp wiredep"
-    }
+  "directory": "www/lib"
 }
