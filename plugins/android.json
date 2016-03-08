@@ -33,6 +33,9 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
         }
     },
     "dependent_plugins": {}

@@ -1,0 +1,32 @@
+[{
+  "id": 0,
+  "title": "Notícia importante",
+  "caption": "Subtítulo de notícia",
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet consectetur urna, sit amet posuere nibh. Nullam sagittis ornare nisl vel luctus. Maecenas non imperdiet tellus, molestie facilisis lectus. Fusce auctor nunc et tempor malesuada. Pellentesque malesuada dignissim ultrices. Etiam ac tellus nec arcu dapibus interdum vitae at neque. Aliquam vitae nunc varius, tincidunt erat ac, maximus eros. Aenean malesuada libero sit amet congue volutpat.",
+  "photoUrl": "http://lorempixel.com/400/200/sports/",
+  "posted": "20-03-2016 17:30",
+  "updated": null,
+  "event": false
+},
+{
+  "id": 1,
+  "title": "Mais uma notícia",
+  "caption": "Subtítulo de notícia",
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet consectetur urna, sit amet posuere nibh. Nullam sagittis ornare nisl vel luctus. Maecenas non imperdiet tellus, molestie facilisis lectus. Fusce auctor nunc et tempor malesuada. Pellentesque malesuada dignissim ultrices. Etiam ac tellus nec arcu dapibus interdum vitae at neque. Aliquam vitae nunc varius, tincidunt erat ac, maximus eros. Aenean malesuada libero sit amet congue volutpat.",
+  "photoUrl": "http://lorempixel.com/400/200/people/",
+  "posted": "22-03-2016 11:20",
+  "updated": null,
+  "event": false
+},
+{
+  "id": 2,
+  "title": "Evento!",
+  "caption": "Subtítulo do evento",
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet consectetur urna, sit amet posuere nibh. Nullam sagittis ornare nisl vel luctus. Maecenas non imperdiet tellus, molestie facilisis lectus. Fusce auctor nunc et tempor malesuada. Pellentesque malesuada dignissim ultrices. Etiam ac tellus nec arcu dapibus interdum vitae at neque. Aliquam vitae nunc varius, tincidunt erat ac, maximus eros. Aenean malesuada libero sit amet congue volutpat.",
+  "photoUrl": "http://lorempixel.com/400/200/nature/",
+  "posted": "25-05-2016 22:30",
+  "updated": null,
+  "event": true,
+  "expire": "14/05/16"
+}
+]

@@ -1,0 +1,42 @@
+<ion-view view-title="{{ 'main_title' | translate }}">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-chatbubbles" ng-click="popover.show($event)"></button>
+  </ion-nav-buttons>
+
+  <!-- <ion-header-bar class="bar bar-subheader bar-energized">
+    <h4 class="caption">{{ }}</h4>
+  </ion-header-bar> -->
+
+  <ion-content >
+    <div id="map">
+      <leaflet lf-center="vm.mapCenter" markers="vm.centers" event-broadcast="vm.events" height="100%" width="100%"></leaflet>
+    </div>
+
+
+    <ion-list>
+
+      <div class="tabs">
+        <div class="item item-divider">
+          {{ 'reorder_by' | translate }}
+        </div>
+        <a class="tab-item" ng-click="reorder('distance')">
+          {{ 'distance' | translate }}
+        </a>
+        <a class="tab-item" ng-click="reorder('name')">
+          {{ 'name' | translate }}
+        </a>
+        <a class="tab-item" ng-click="reorder('restaurants')">
+          {{ 'restaurants' | translate }}
+        </a>
+      </div>
+       <!-- | orderBy:'distance' -->
+      <ion-item class="item-thumbnail-left item-icon-right" collection-repeat="center in vm.centers" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" nav-direction="forward">
+        <img class="media-object pull-left" ng-src={{center.photoUrl}} width="80" height="80">
+        <h2 class="text-bold">{{center.title}}</h2>
+        <i class="ion-location"></i> {{center.distance}} km
+        <span class="badge badge-assertive">{{center.restaurants}}</span>
+        <i class="icon ion-arrow-right-c"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

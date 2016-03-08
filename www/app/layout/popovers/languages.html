@@ -1,0 +1,20 @@
+<ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">
+        {{ 'choose_language' | translate }}
+      </h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-radio ng-model="language" value="pt-BR" ng-click="changeLanguage('pt-BR')">
+          {{ 'portuguese' | translate }}
+        </ion-radio>
+        <ion-radio ng-model="language" value="en" ng-click="changeLanguage('en')">
+          {{ 'english' | translate }}
+        </ion-radio>
+        <ion-radio ng-model="language" value="es" ng-click="changeLanguage('es')">
+          {{ 'spanish' | translate }}
+        </ion-radio>
+      </ion-list>
+    </ion-content>
+</ion-popover-view>

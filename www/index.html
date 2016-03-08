@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+
+        <link rel="stylesheet" href="lib/animate.css/animate.css" />
+        <link rel="stylesheet" href="lib/angular-fx/dist/angular-fx.min.css" />
+        <link rel="stylesheet" href="lib/leaflet/dist/leaflet.css" />
+        <link rel="stylesheet" href="css/ionic.app.css">
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <script src="cordova.js"></script>
+
+    </head>
+    <body ng-app="app">
+        <!--
+            The nav bar that will be updated as we navigate between views.
+        -->
+        <ion-nav-bar class="bar-energized">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+
+        <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+        <script src="lib/angular-messages/angular-messages.js"></script>
+        <script src="lib/angular-fx/dist/angular-fx.min.js"></script>
+        <script src="lib/angular-translate/angular-translate.js"></script>
+        <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+        <script src="lib/leaflet/dist/leaflet-src.js"></script>
+        <script src="lib/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+
+        <script src="app/app.module.js"></script>
+        <script src="app/app.config.js"></script>
+        <script src="app/app.routes.js"></script>
+        <script src="app/app.run.js"></script>
+        <script src="app/core/app.core.module.js"></script>
+        <script src="app/core/app.core.constants.js"></script>
+        <script src="app/main/main.module.js"></script>
+        <script src="app/main/main.controller.js"></script>
+        <script src="app/main/main.routes.js"></script>
+        <script src="app/layout/tabs.module.js"></script>
+        <script src="app/layout/tabs.routes.js"></script>
+        <script src="app/restaurants/restaurants.module.js"></script>
+        <script src="app/restaurants/restaurants.controller.js"></script>
+        <script src="app/restaurants/restaurants.routes.js"></script>
+        <script src="app/news/news.module.js"></script>
+        <script src="app/news/news.controller.js"></script>
+        <script src="app/news/news.routes.js"></script>
+        <script src="app/news/news-detail.controller.js"></script>
+        <script src="app/services/centers.service.js"></script>
+        <script src="app/services/news.service.js"></script>
+        <script src="app/services/restaurants.service.js"></script>
+        <script src="app/services/network.monitor.service.js"></script>
+    </body>
+</html>

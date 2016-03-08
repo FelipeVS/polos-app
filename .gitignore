@@ -50,11 +50,10 @@ ios/www/
 *.db
 
 node_modules/
-src/lib/
-src/.tmp/
 platforms/
-www/
-www/*
+www/lib/
+www/lib/*
+plugins/
 
 .sass-cache
 .sass-cache/*
