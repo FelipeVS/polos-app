@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['$scope', '$rootScope', 'CentersService', 'RestaurantsService', 'NewsService'];
+    MainController.$inject = ['$scope', '$rootScope', '$filter', '$timeout', 'CentersService', 'RestaurantsService', 'NewsService'];
 
     /* @ngInject */
-    function MainController($scope, $rootScope, CentersService, RestaurantsService, NewsService) {
+    function MainController($scope, $rootScope, $filter, $timeout, CentersService, RestaurantsService, NewsService) {
         var vm = this;
         vm.mapCenter = {
             lat: -23.374004,
@@ -22,6 +22,8 @@
             }
         }
         vm.saveCenter = saveCenter;
+        vm.reorder = reorder;
+        vm.mixing = false;
 
         $scope.$on('leafletDirectiveMap.locationfound', function(event){
             vm.eventDetected = "LocationFound";
@@ -41,5 +43,14 @@
             CentersService.saveCenter(center);
         }
 
+        function reorder(key) {
+            vm.mixing = true;
+            vm.order = key;
+            vm.reverse = (vm.order === key) ? !vm.reverse : false;
+            vm.centers = $filter('orderBy')(vm.centers, key, vm.reverse);
+            $timeout(function() {
+              vm.mixing = false;
+            },500)
+        }
     }
 })();

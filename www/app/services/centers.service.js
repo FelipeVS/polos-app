@@ -5,12 +5,12 @@
     .module('app.services')
     .factory('CentersService', centersService);
 
-    centersService.$inject = ['$http', '$q', 'serverUrl'];
+    centersService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'serverUrl'];
 
     var centers = [];
 
     /* @ngInject */
-    function centersService($http, $q, serverUrl) {
+    function centersService($http, $q, $rootScope, $cordovaToast, serverUrl) {
         var service = {
             getAll: getAll,
             saveCenter: saveCenter,
@@ -29,11 +29,15 @@
 
             function getCentersComplete(response) {
                 centers = response.data;
+                if (centers === 0 ) {
+                  $cordovaToast.showLongBottom($rootScope.messages.error_operation);
+                }
                 return centers;
             }
 
             function getCentersFailed(error) {
                 console.log('XHR Failed for getCenters.' + error.data);
+                $cordovaToast.showLongBottom($rootScope.messages.error_operation);
             }
         }
 

@@ -1,8 +1,5 @@
 var faker = require('faker');
 faker.locale = "pt_BR";
-randomBool =  function() {
-  return Math.random() >= 0.5;
-}
 
 // index.js
 module.exports = function() {
@@ -28,10 +25,12 @@ module.exports = function() {
       city: center.city,
       neighborhood: faker.name.firstName(),
       description: faker.lorem.paragraph(),
-      openHours: '',
+      openHours: faker.random.number(),
       address: faker.address.streetAddress(),
       phone: faker.phone.phoneNumber(),
-      M4T: randomBool(),
+      M4T: faker.random.boolean(),
+      homepage: faker.internet.url(),
+      social: faker.internet.url(),
       photoUrl: faker.image.image(),
       created: faker.date.past(),
       updated: faker.date.past(),
@@ -57,7 +56,7 @@ module.exports = function() {
       photoUrl: faker.image.image(),
       created: faker.date.past(),
       updated: faker.date.past(),
-      event: randomBool(),
+      event: faker.random.boolean(),
     })
   }
 
@@ -76,12 +75,13 @@ module.exports = function() {
       instance.openHours = faker.random.number();
       instance.phone = faker.phone.phoneNumber();
       instance.homepage = faker.internet.url();
+      instance.social = faker.internet.url();
       instance.created = faker.date.past();
       instance.updated = faker.date.past();
       instance.lat = parseFloat(faker.address.latitude());
       instance.lng = parseFloat(faker.address.longitude());
-      instance.distance = faker.random.number();
-      instance.restaurants = '';
+      instance.distance = faker.random.number({'min': 0.1, 'max': 352 });
+      instance.restaurants = faker.random.number({'min': 1, 'max': 15});
       result.push(instance);
     }
     centersPool = result;

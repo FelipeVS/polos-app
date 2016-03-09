@@ -16,34 +16,38 @@
 
     <div id="more_info" class="subsection">
       <div class="item item-divider" style="text-align:center">
-        {{getMoreInfoText()}}
+        {{ "more_info" | translate }}
       </div>
       <div class="list">
-        <div class="item item-icon-left" ng-show="vm.center.openHours">
+        <div class="item item-icon-left" ng-if="vm.center.openHours">
           <i class="icon ion-clock"></i>
           {{vm.center.openHours}}
         </div>
-        <a class="item item-icon-left" ng-show="vm.center.phone" ng-href="tel: {{vm.center.phone}}">
+        <a class="item item-icon-left" ng-if="vm.center.phone" ng-href="tel: {{vm.center.phone}}">
           <i class="icon ion-ios-telephone-outline"></i>
           {{vm.center.phone}}
         </a>
-        <a class="item item-icon-left" ng-show="vm.center.homepage" ng-click="openBrowser(vm.center.homepage)">
+        <a class="item item-icon-left" ng-if="vm.center.homepage" ng-click="openBrowser(vm.center.homepage)">
           <i class="icon ion-ios-home-outline"></i>
           {{vm.center.homepage}}
         </a>
+        <a class="item item-icon-left" ng-if="vm.center.social" ng-click="openBrowser(vm.center.social)">
+          <i class="icon ion-social-facebook-outline"></i>
+          {{vm.center.social}}
+        </a>
 
-        <p class="description_container" ng-class="{show_more: vm.isMoreInfoShown}">{{vm.center.text}}
-
+        <p class="description_container" ng-class="{show_more: vm.isMoreInfoShown}"  ngfx-fade-in="vm.isMoreInfoShown" ngfx-fade-out="!vm.isMoreInfoShown">
+          {{vm.center.text}}
         </p>
         <button class="button button-small button-full icon" ng-class="{'ion-minus': vm.isMoreInfoShown, 'ion-plus': !vm.isMoreInfoShown }" ng-click="vm.showInfo()"></button>
 
       </div>
     </div>
 
-  <ion-list>
+  <ion-list ng-hide="vm.restaurants.length==0">
     <!-- ITEM HEADER -->
-    <div class="list list-inset list-rounded" ng-repeat="restaurant in vm.restaurants">
-      <div class="item-header item item-icon-right" ng-click="vm.toggleGroup(restaurant)" ng-class="{active: vm.isGroupShown(restaurant)}">
+    <div class="list list-inset" ng-class="{'last-restaurant': $last}" ng-repeat="restaurant in vm.restaurants track by restaurant.id">
+      <div class="item-header item item-icon-right item-rounded" ng-click="vm.toggleGroup(restaurant)" ng-class="{'item-active': vm.isGroupShown(restaurant)}">
         <img class="icon" src="images\m4t.png" style="padding:7px;" ng-hide="!restaurant.M4T">
         <h3 class="iten-text-wrap text-bold">{{restaurant.title}}</h3>
       </div>
@@ -63,17 +67,25 @@
             <i class="icon ion-clock"></i>
             {{restaurant.openHours}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-href="tel: {{restaurant.phone}}" ng-if="restaurant.phone">
             <i class="icon ion-ios-telephone"></i>
             {{restaurant.phone}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.homepage)" ng-if="restaurant.homepage">
+            <i class="icon ion-ios-home"></i>
+            {{restaurant.homepage}}
+          </ion-item>
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.social)" ng-if="restaurant.social">
+            <i class="icon ion-ios-home"></i>
+            {{restaurant.homepage}}
+          </ion-item>
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.lat, restaurant.lng)">
             <i class="icon ion-location"></i>
             {{restaurant.address}}
           </ion-item>
         </ion-list>
 
-        <button class="button button-full button-positive" ng-hide="!restaurant.M4T">
+        <button class="button button-full button-positive" ng-hide="!restaurant.M4T" ng-click="vm.goToM4t()">
           Ir para o Menu for Tourist
         </button>
       </div>

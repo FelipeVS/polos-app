@@ -5,10 +5,10 @@
         .module('app.services')
         .service('RestaurantsService', RestaurantsService);
 
-    RestaurantsService.$inject = ['$http', '$q', 'serverUrl', 'CentersService'];
+    RestaurantsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'serverUrl', 'CentersService'];
 
     /* @ngInject */
-    function RestaurantsService($http, $q, serverUrl, CentersService) {
+    function RestaurantsService($http, $q, $rootScope, $cordovaToast, serverUrl, CentersService) {
 
         var service = {
             getAll: getAll,
@@ -31,11 +31,15 @@
             function getRestaurantsComplete(response) {
                 restaurants = response.data;
                 console.log("RESTAURANTS: ", restaurants);
+                if (restaurants.length ===0 ) {
+                  $cordovaToast.showShortBottom($rootScope.messages.error_no_restaurants);
+                }
                 return restaurants;
             }
 
             function getRestaurantsFailed(error) {
                 console.log('XHR Failed for getRestaurants.' + error.data);
+                $cordovaToast.showLongBottom($rootScope.messages.error_operation);
             }
         }
 

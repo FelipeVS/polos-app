@@ -11,5 +11,13 @@
   "translated_menu": "Este restaurante possui cardápio traduzido",
   "go_to_m4t": "Ir para o Menu for Tourist",
   "news_and_events": "Notícias & Eventos",
-  "event_date": "Data do evento"
+  "event_date": "Data do evento",
+  "choose_language": "Escolha o idioma",
+  "more_info": "Mais informações",
+  "offline":	"Você não está conectado",
+  "online":	"Você está conectado",
+  "error_operation":	"Não foi possível executar esta operação. Por favor, tente novamente mais tarde",
+  "error_no_restaurants":	"Nenhum restaurante encontrado",
+  "error_no_news":	"Nenhuma notícia encontrada",
+  "loading":	"Carregando..."
 }

@@ -59,13 +59,17 @@ $font-family-base: "Raleway", sans-serif !default;
    border-width: 0 !important;
   }
 
-
-.list-rounded {
-  border-radius:10px;
+.item-rounded {
+  border-radius:10px !important;
+}
+.item-active {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
 .note-rounded {
   border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
+  border-width: 0px;
 }
 .note {
   padding:0;
@@ -81,6 +85,11 @@ $font-family-base: "Raleway", sans-serif !default;
   }
   .info-alert {
     color: red;
+  }
+}
+.info-item {
+  .item-content {
+    background-color: transparent !important;
   }
 }
 .restaurant-text {
@@ -128,4 +137,14 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 #map .card {
   position: relative;
   bottom: -150px;
+}
+
+.tabs-bar {
+  .tabs {
+    position: initial;
+  }
+}
+
+.last-restaurant {
+  margin-bottom: 50px !important;
 }

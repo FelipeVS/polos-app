@@ -3,6 +3,32 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta http-equiv="Content-Security-Policy" content="
+        default-src
+          *
+          data: ;
+        script-src
+          'self'
+          'unsafe-inline'
+          'unsafe-eval'
+          http://localhost:*
+          http://*.gstatic.com
+          https://*.gstatic.com
+          http://*.googleapis.com
+          https://*.googleapis.com
+          http://*.polosgourmet.com
+          https://*.polosgourmet.com
+          http://*.openstreetmap.com/
+          https://*.openstreetmap.com/
+          http://polosgourmet.s3.amazonaws.com/
+          https://polosgourmet.s3.amazonaws.com/ ;
+        style-src
+          *
+          'self'
+          'unsafe-inline'
+          'unsafe-eval'
+        " >
+
         <title></title>
 
         <link rel="stylesheet" href="lib/animate.css/animate.css" />
