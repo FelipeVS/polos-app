@@ -10,10 +10,19 @@
     /* @ngInject */
     function MainController($scope, $rootScope, $filter, $timeout, CentersService, RestaurantsService, NewsService) {
         var vm = this;
+        var icon = {
+            iconUrl: 'images/icon/flag.png',
+            shadowUrl: 'images/icon/flag-shadow.png',
+            iconSize:     [24, 24],
+            shadowSize:   [24, 24],
+            iconAnchor:   [12, 0],
+            shadowAnchor: [6, 0]
+        };
         vm.mapCenter = {
             lat: -23.374004,
             lng: -43.890359,
-            zoom: 7
+            zoom: 7,
+            message: "I'm here!"
         }
         vm.events = {
             map: {
@@ -36,6 +45,10 @@
         function activate() {
             return CentersService.getAll().then(function(data) {
                 vm.centers = data;
+                angular.forEach(vm.centers, function(a, ind){
+                  vm.centers[ind].icon = icon;
+                })
+                console.log(vm.centers)
             });
         }
 

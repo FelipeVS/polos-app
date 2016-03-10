@@ -4,28 +4,13 @@ faker.locale = "pt_BR";
 // index.js
 module.exports = function() {
   var data = {
-    centers: [],
     restaurants: [],
+    centers: [],
     news: []
   }
-  var polos = [
-    'Polo Paraty',
-    'Polo Sabores do Interior',
-    'Polo Ipiabas',
-    'Polo Lumiar & São Pedro da Serra',
-    'Polo Angra Gastronômica',
-    'Polo Orla Gastronômica',
-    'Polo Jardim Icaraí',
-    'Polo Pedra de Guaratiba',
-    'Polo Jardim Oceânico',
-    'Polo Lido',
-    'Polo Botafogo'
-  ]
-  var centersQuantity = polos.length;
+  var centersQuantity = 30;
   var centersPool = [];
   createCenters();
-
-
 
   // Create 150 restaurants
   for (var i = 0; i < 150; i++) {
@@ -34,8 +19,7 @@ module.exports = function() {
 
     data.restaurants.push({
       id: i,
-      title: faker.address.city(),
-      message: faker.address.city(),
+      title: faker.name.title(),
       center: center.title,
       state: center.state,
       city: center.city,
@@ -82,9 +66,8 @@ module.exports = function() {
     for (var i = 0; i < centersQuantity; i++) {
       var instance = {};
       instance.id = i;
-      instance.title = polos[i];
-      instance.message = polos[i];
-      instance.state = 'RJ';
+      instance.title = "Polo " + faker.address.city();
+      instance.state = faker.address.stateAbbr();
       instance.city = faker.address.city();
       instance.neighborhoods = createNeighborhoods();
       instance.text = faker.lorem.paragraphs();
