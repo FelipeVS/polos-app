@@ -1,8 +1,15 @@
 <ion-view view-title="{{vm.singleNews.title}}">
   <ion-content class="padding">
-    <img ng-src="{{vm.singleNews.photoUrl}}" style="width: 100%;">
+    <!-- THIS WILL NEED AN UPDATE AS IONIC IS UPDATED -->
+    <ion-slide-box class="slide-show" auto-play does-continue show-pager="false">
+      <ion-slide ng-repeat="photo in vm.singleNews.photos track by $index">
+        <ion-content scroll="false">
+          <img ng-src="{{photo}}">
+        </ion-content>
+      </ion-slide>
+    </ion-slide-box>
     <h3> {{vm.singleNews.caption}} </h3>
-    <small><i>{{vm.singleNews.posted}}</i></small>
+    <small><i>{{vm.singleNews.created | date:"dd/MM/yyyy - HH:mm"}}</i></small>
     <br>
     <p>
       {{vm.singleNews.text}}

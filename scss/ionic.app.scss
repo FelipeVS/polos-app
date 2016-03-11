@@ -148,3 +148,13 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 .last-restaurant {
   margin-bottom: 50px !important;
 }
+
+.slide-show {
+  width: 100%;
+  height: 300px;
+  img {
+    width: auto;
+    height: 100%;
+  }
+
+}

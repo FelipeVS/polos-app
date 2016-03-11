@@ -8,10 +8,17 @@
   "english": "English",
   "spanish": "Spanish",
   "portuguese": "Portuguese",
-  "translated_menu": "This restaurant menu is translated",
-  "go_to_m4t": "Go to Menu for Tourist",
+  "translated_menu": "This restaurant has a translated menu",
+  "go_to_m4t": "Check the menu translated",
   "news_and_events": "News and Events",
-  "event_date": "Date",
+  "event_date": "Event Date",
   "choose_language": "Choose the language",
-  "more_info": "More info"
+  "more_info": "More info",
+  "offline":	"You are not connected",
+  "online":	"You are connected",
+  "error_operation":	"It was not possible to execute this operation. Please, try again later.",
+  "error_no_restaurants":	"No restaurant found",
+  "error_no_news":	"No news found",
+  "loading":	"Loading..."
+
 }

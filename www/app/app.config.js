@@ -5,10 +5,11 @@
     .module('app')
     .config(configure);
 
-    configure.$inject = ['$translateProvider'];
+    configure.$inject = ['$ionicConfigProvider', '$translateProvider'];
 
-    function configure ($translateProvider) {
+    function configure ($ionicConfigProvider, $translateProvider) {
 
+        $ionicConfigProvider.backButton.text('').icon('ion-arrow-left-c');
         // ANGULAR-TRANSLATE
         $translateProvider.useStaticFilesLoader({
           prefix: 'translation/',

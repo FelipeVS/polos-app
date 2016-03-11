@@ -1,6 +1,25 @@
 var faker = require('faker');
 faker.locale = "pt_BR";
 
+function randomLat() {
+  var rioLat = faker.random.number({'min': -21, 'max': -24});
+  return rioLat + '.' + faker.random.number()
+}
+function randomLng() {
+  var rioLng = faker.random.number({'min': -41, 'max': -44});
+  return rioLng + '.' + faker.random.number()
+}
+function randomPhotos() {
+  var result = [];
+  var x = faker.random.number({'min': 1, 'max': 5})
+
+  for (var i = 0; i < x; i++) {
+    var photo = faker.image.image();
+    result.push(photo)
+  }
+  return result;
+}
+
 // index.js
 module.exports = function() {
   var data = {
@@ -24,15 +43,14 @@ module.exports = function() {
   var centersQuantity = polos.length;
   var centersPool = [];
   createCenters();
-
-
+  var restaurantsQuantity = 150;
+  var newsQuantity = 150;
 
   // Create 150 restaurants
-  for (var i = 0; i < 150; i++) {
+  for (var i = 0; i < restaurantsQuantity; i++) {
     var number = Math.floor(Math.random() * centersQuantity) + 0;
     var center = centersPool[number];
-
-    data.restaurants.push({
+    var rest = {
       id: i,
       title: faker.address.city(),
       message: faker.address.city(),
@@ -50,30 +68,32 @@ module.exports = function() {
       photoUrl: faker.image.image(),
       created: faker.date.past(),
       updated: faker.date.past(),
-      lat: parseFloat(faker.address.latitude()),
-      lng: parseFloat(faker.address.longitude())
-    })
+      lat: parseFloat(randomLat()),
+      lng:  parseFloat(randomLng())
+    }
+    data.restaurants.push(rest)
   }
   // Create 30 centers
   for (var i = 0; i < centersQuantity; i++) {
     data.centers.push(centersPool[i])
   }
   // Create 50 news
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < newsQuantity; i++) {
     var number = Math.floor(Math.random() * centersQuantity) + 0;
     var center = centersPool[number];
-
-    data.news.push({
+    var photos = randomPhotos();
+    var instanceNews = {
       id: i,
       center: center.title,
       title: faker.name.title(),
       caption: faker.lorem.sentence(),
       text: faker.lorem.paragraphs(),
-      photoUrl: faker.image.image(),
+      photos: photos,
       created: faker.date.past(),
       updated: faker.date.past(),
       event: faker.random.boolean(),
-    })
+    }
+    data.news.push(instanceNews)
   }
 
   function createCenters() {
@@ -95,8 +115,8 @@ module.exports = function() {
       instance.social = faker.internet.url();
       instance.created = faker.date.past();
       instance.updated = faker.date.past();
-      instance.lat = parseFloat(faker.address.latitude());
-      instance.lng = parseFloat(faker.address.longitude());
+      instance.lat = parseFloat(randomLat());
+      instance.lng = parseFloat(randomLng());
       instance.distance = faker.random.number({'min': 0.1, 'max': 352 });
       instance.restaurants = faker.random.number({'min': 1, 'max': 15});
       result.push(instance);
@@ -111,8 +131,6 @@ module.exports = function() {
     }
     return ngbs;
   }
-
-
   //return the json
   return data
 }

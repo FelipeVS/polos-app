@@ -56,14 +56,14 @@
         <img ng-src="{{restaurant.photoUrl}}" style="width:100%">
 
         <ion-list class="list-inset">
-          <a class="item item-icon-left info-item info-alert restaurant-text item-text-wrap" href="#" ng-hide="!restaurant.M4T">
+          <a class="item item-icon-left info-item info-alert restaurant-text item-text-wrap" href="#" ng-if="restaurant.M4T">
             <i class="icon ion-alert"></i>
             Esse restaurante possui o cardápio traduzido.
           </a>
-          <ion-item class="info-item restaurant-text item-text-wrap">
+          <ion-item class="info-item restaurant-text item-text-wrap" ng-if="restaurant.description">
             {{restaurant.description}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-if="restaurant.openHours">
             <i class="icon ion-clock"></i>
             {{restaurant.openHours}}
           </ion-item>
@@ -76,16 +76,16 @@
             {{restaurant.homepage}}
           </ion-item>
           <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.social)" ng-if="restaurant.social">
-            <i class="icon ion-ios-home"></i>
+            <i class="icon ion-social-facebook"></i>
             {{restaurant.homepage}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.lat, restaurant.lng)">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.lat, restaurant.lng)" ng-if="restaurant.address">
             <i class="icon ion-location"></i>
             {{restaurant.address}}
           </ion-item>
         </ion-list>
 
-        <button class="button button-full button-positive" ng-hide="!restaurant.M4T" ng-click="vm.goToM4t()">
+        <button class="button button-full button-positive" ng-if="restaurant.M4T" ng-click="vm.goToM4t()">
           Ir para o Menu for Tourist
         </button>
       </div>
