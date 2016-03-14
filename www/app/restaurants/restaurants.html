@@ -1,4 +1,4 @@
-<ion-view title="{{vm.center.title}}">
+<ion-view title="{{ getTranslation(vm.center.title, selectedLanguage) }}">
 
   <ion-nav-buttons side="left">
     <button class="button button-icon icon ion-chevron-left" ng-click="vm.backToCenters()"></button>
@@ -11,7 +11,7 @@
   <ion-content>
 
     <div id="map">
-      <leaflet lf-center="vm.mapCenter" markers="vm.restaurants" height="100%" width="100%"></leaflet>
+      <leaflet lf-center="vm.mapCenter" markers="vm.markers" height="100%" width="100%"></leaflet>
     </div>
 
     <div id="more_info" class="subsection">
@@ -37,7 +37,7 @@
         </a>
 
         <p class="description_container" ng-class="{show_more: vm.isMoreInfoShown}"  ngfx-fade-in="vm.isMoreInfoShown" ngfx-fade-out="!vm.isMoreInfoShown">
-          {{vm.center.text}}
+          {{ getTranslation(vm.center.description, selectedLanguage) }}
         </p>
         <button class="button button-small button-full icon" ng-class="{'ion-minus': vm.isMoreInfoShown, 'ion-plus': !vm.isMoreInfoShown }" ng-click="vm.showInfo()"></button>
 
@@ -49,7 +49,9 @@
     <div class="list list-inset" ng-class="{'last-restaurant': $last}" ng-repeat="restaurant in vm.restaurants track by restaurant.id">
       <div class="item-header item item-icon-right item-rounded" ng-click="vm.toggleGroup(restaurant)" ng-class="{'item-active': vm.isGroupShown(restaurant)}">
         <img class="icon" src="images\m4t.png" style="padding:7px;" ng-hide="!restaurant.M4T">
-        <h3 class="iten-text-wrap text-bold">{{restaurant.title}}</h3>
+        <h3 class="iten-text-wrap text-bold">
+          {{ restaurant.title }}
+        </h3>
       </div>
       <!-- EXPANDABLE AREA -->
       <div class="item item-stable item-accordion note note-rounded" ng-show="vm.isGroupShown(restaurant)" ngfx-fade-in="vm.isGroupShown(restaurant)" ngfx-fade-out="!vm.isGroupShown(restaurant)">
@@ -58,10 +60,10 @@
         <ion-list class="list-inset">
           <a class="item item-icon-left info-item info-alert restaurant-text item-text-wrap" href="#" ng-if="restaurant.M4T">
             <i class="icon ion-alert"></i>
-            Esse restaurante possui o cardápio traduzido.
+            {{ 'translated_menu' | translate }}
           </a>
           <ion-item class="info-item restaurant-text item-text-wrap" ng-if="restaurant.description">
-            {{restaurant.description}}
+            {{ getTranslation(restaurant.description, selectedLanguage) }}
           </ion-item>
           <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-if="restaurant.openHours">
             <i class="icon ion-clock"></i>
@@ -77,7 +79,7 @@
           </ion-item>
           <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.social)" ng-if="restaurant.social">
             <i class="icon ion-social-facebook"></i>
-            {{restaurant.homepage}}
+            {{restaurant.social}}
           </ion-item>
           <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.lat, restaurant.lng)" ng-if="restaurant.address">
             <i class="icon ion-location"></i>
@@ -86,7 +88,7 @@
         </ion-list>
 
         <button class="button button-full button-positive" ng-if="restaurant.M4T" ng-click="vm.goToM4t()">
-          Ir para o Menu for Tourist
+          {{ 'go_to_m4t' | translate }}
         </button>
       </div>
     </div>

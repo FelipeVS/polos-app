@@ -28,7 +28,7 @@
         function getAll() {
             var centerParam = CentersService.getCenter();
             return $http.get(serverUrl + 'news', {
-                params: {center: centerParam.title},
+                params: {center: centerParam.title.valor},
             })
               .then(getNewsComplete)
               .catch(getNewsFailed);

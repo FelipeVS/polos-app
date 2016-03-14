@@ -7,7 +7,8 @@
         'pascalprecht.translate',
         '720kb.fx',
         'leaflet-directive',
-        'ngCordova'
+        'ngCordova',
+        'ionicProcessSpinner'
         /* Cross-app module */
         // 'my.appModule',
 

@@ -23,7 +23,7 @@
             var centerParam = CentersService.getCenter();
 
             return $http.get(serverUrl + 'restaurants', {
-                params: {center: centerParam.title},
+                params: {center: centerParam.title.valor},
             })
               .then(getRestaurantsComplete)
               .catch(getRestaurantsFailed);

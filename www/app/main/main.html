@@ -19,9 +19,9 @@
 
     <div class="tabs-bar">
       <div class="tabs">
-        <div class="item item-divider">
+        <!-- <div class="item item-divider">
           <i class="icon ion-shuffle"></i>
-        </div>
+        </div> -->
         <a class="tab-item" ng-click="vm.reorder('name')">
           {{ 'name' | translate }}
         </a>
@@ -33,15 +33,21 @@
         </a>
       </div>
     </div>
-
-    <ion-list>
-      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
-        <img class="media-object pull-left" ng-src={{center.photoUrl}} width="80" height="80">
-        <h2 class="text-bold">{{center.title}}</h2>
-        <i class="ion-location"></i> {{center.distance}} km
-        <span class="badge badge-assertive">{{center.restaurants}}</span>
-        <i class="icon ion-arrow-right-c"></i>
-      </ion-item>
-    </ion-list>
+    <ion-process-spinner css-class="spinner-energized" spinner="crescent" processing="vm.isLoading">
+      <ion-list>
+        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
+          <img class="media-object pull-left" ng-src={{center.photoUrl}} width="80" height="80">
+          <h2 class="text-bold">
+            {{ getTranslation(center.title, selectedLanguage) }}
+          </h2>
+          <i class="ion-location"></i> {{center.distance}} km
+          <span class="badge badge-assertive"> {{center.restaurants}} </span>
+          <i class="icon ion-arrow-right-c"></i>
+        </ion-item>
+      </ion-list>
+      <div class="error_panel" ng-if="offline">
+        BUNDA
+      </div>
+    </ion-process-spinner>
   </ion-content>
 </ion-view>

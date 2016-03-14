@@ -54,11 +54,24 @@ module.exports = function() {
       id: i,
       title: faker.address.city(),
       message: faker.address.city(),
-      center: center.title,
+      center: center.title.valor,
       state: center.state,
       city: center.city,
       neighborhood: faker.name.firstName(),
-      description: faker.lorem.paragraph(),
+      description: {
+          valor: faker.lorem.paragraphs(),
+          idioma: 'pt-BR',
+          traducoes: [
+            {
+              valor: faker.lorem.paragraphs(),
+              idioma: 'en',
+            },
+            {
+              valor: faker.lorem.paragraphs(),
+              idioma: 'es',
+            }
+          ]
+      },
       openHours: faker.random.number(),
       address: faker.address.streetAddress(),
       phone: faker.phone.phoneNumber(),
@@ -68,8 +81,11 @@ module.exports = function() {
       photoUrl: faker.image.image(),
       created: faker.date.past(),
       updated: faker.date.past(),
-      lat: parseFloat(randomLat()),
-      lng:  parseFloat(randomLng())
+      lat: parseFloat((JSON.stringify(center.lat)).slice(0,6) + JSON.stringify(faker.random.number({'min': 0, 'max': 999}))),
+      lng:  parseFloat((JSON.stringify(center.lng)).slice(0,6) + JSON.stringify(faker.random.number({'min': 0, 'max': 99})))
+
+      // lat: parseFloat(randomLat()),
+      // lng:  parseFloat(randomLng())
     }
     data.restaurants.push(rest)
   }
@@ -84,7 +100,7 @@ module.exports = function() {
     var photos = randomPhotos();
     var instanceNews = {
       id: i,
-      center: center.title,
+      center: center.title.valor,
       title: faker.name.title(),
       caption: faker.lorem.sentence(),
       text: faker.lorem.paragraphs(),
@@ -102,12 +118,38 @@ module.exports = function() {
     for (var i = 0; i < centersQuantity; i++) {
       var instance = {};
       instance.id = i;
-      instance.title = polos[i];
+      instance.title = {
+          valor: polos[i],
+          idioma: 'pt-BR',
+          traducoes: [
+            {
+              valor: polos[i] + ' EN',
+              idioma: 'en',
+            },
+            {
+              valor: polos[i] + ' ES',
+              idioma: 'es',
+            }
+          ]
+      };
       instance.message = polos[i];
       instance.state = 'RJ';
       instance.city = faker.address.city();
       instance.neighborhoods = createNeighborhoods();
-      instance.text = faker.lorem.paragraphs();
+      instance.description = {
+          valor: faker.lorem.paragraphs(),
+          idioma: 'pt-BR',
+          traducoes: [
+            {
+              valor: faker.lorem.paragraphs(),
+              idioma: 'en',
+            },
+            {
+              valor: faker.lorem.paragraphs(),
+              idioma: 'es',
+            }
+          ]
+      };
       instance.photoUrl = faker.image.image();
       instance.openHours = faker.random.number();
       instance.phone = faker.phone.phoneNumber();

@@ -5,9 +5,25 @@
     .module('app')
     .run(runBlock);
 
-    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite'];
+    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite', 'NetworkMonitor'];
 
-    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite) {
+    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite, NetworkMonitor) {
+
+        $rootScope.getTranslation = function(object, locale, clear) {
+            if (object === null || object.traducoes === null) {
+                return;
+            }
+            var translation = object.valor;
+            for (var i = 0; i < object.traducoes.length; i++) {
+                if (object.traducoes[i].idioma.toUpperCase() == locale.toUpperCase()) {
+                    translation = object.traducoes[i].valor;
+                }
+            }
+            if (clear) {
+                return translation.replace(/\./g,'');
+            }
+            return translation;
+        };
 
         getTranslations();
 
@@ -31,6 +47,8 @@
           if (ionic.Platform.isWebView()) {
           }
 
+          startNetworkMonitor();
+
           generateLanguagePopover();
           // Open external links in system browser
           openBrowser();
@@ -38,6 +56,7 @@
 
         function getTranslations() {
           $rootScope.$on('$translateChangeSuccess', function () {
+            $rootScope.selectedLanguage = $translate.use();
             $translate([
               'error_operation',
               'error_no_restaurants',
@@ -67,6 +86,10 @@
         }
         function errorcb() {
           console.log('Error!');
+        }
+
+        function startNetworkMonitor() {
+          NetworkMonitor.start();
         }
 
         function generateLanguagePopover() {

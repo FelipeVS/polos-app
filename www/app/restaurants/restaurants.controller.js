@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['$rootScope', '$cordovaLaunchNavigator', 'CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate'];
+    RestaurantsController.$inject = ['$rootScope', '$cordovaLaunchNavigator', 'mapIcons', 'CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function RestaurantsController($rootScope, $cordovaLaunchNavigator, CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate) {
+    function RestaurantsController($rootScope, $cordovaLaunchNavigator, mapIcons, CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate) {
         var vm = this;
 
         vm.backToCenters = backToCenters;
@@ -19,6 +19,7 @@
         vm.shownGroup;
         vm.openNavigation = openNavigation;
         vm.goToM4t = openM4t;
+        vm.markers = [];
 
         activate();
 
@@ -26,12 +27,20 @@
 
         function activate() {
             vm.center = CentersService.getCenter();
+            vm.markers[0] = vm.center;
+            vm.markers[0].icon = mapIcons.center;
             vm.mapCenter = {
                 lat: vm.center.lat,
                 lng: vm.center.lng,
-                zoom: 8
+                zoom: 14
             }
             vm.restaurants = RestaurantsService.getRestaurants();
+            angular.forEach(vm.restaurants, function(a, ind){
+              var restaurant = vm.restaurants[ind];
+              restaurant.icon = mapIcons.restaurant;
+              vm.markers[ind+1] = restaurant;
+            })
+
         }
 
         function backToCenters() {
