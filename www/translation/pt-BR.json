@@ -19,5 +19,6 @@
   "error_operation":	"Não foi possível executar esta operação. Por favor, tente novamente mais tarde",
   "error_no_restaurants":	"Nenhum restaurante encontrado",
   "error_no_news":	"Nenhuma notícia encontrada",
-  "loading":	"Carregando..."
+  "loading":	"Carregando...",
+  "reload": "Tentar novamente"
 }

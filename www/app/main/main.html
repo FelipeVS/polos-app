@@ -1,18 +1,9 @@
 <ion-view view-title="{{ 'main_title' | translate }}">
   <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-chatbubbles" ng-click="popover.show($event)"></button>
+    <button class="button button-icon icon ion-chatbubbles" ng-click="openLanguage($event)"></button>
   </ion-nav-buttons>
 
-  <!-- <ion-header-bar class="bar bar-subheader bar-energized">
-    <h4 class="caption">{{ }}</h4>
-  </ion-header-bar> -->
-
-  <ion-content >
-
-    <div class="Message-bar" ng-class="{'alert-bar': message.type=='alert', 'green-bar': message.type=='green'}" ng-if="message">
-      {{ message.text | translate }}
-    </div>
-
+  <ion-content lazyImgContainer has-bouncing="false">
     <div id="map">
       <leaflet lf-center="vm.mapCenter" markers="vm.centers" defaults="vm.defaults" event-broadcast="vm.events" height="100%" width="100%"></leaflet>
     </div>
@@ -20,7 +11,7 @@
     <div class="tabs-bar">
       <div class="tabs">
         <!-- <div class="item item-divider">
-          <i class="icon ion-shuffle"></i>
+        <i class="icon ion-shuffle"></i>
         </div> -->
         <a class="tab-item" ng-click="vm.reorder('name')">
           {{ 'name' | translate }}
@@ -33,10 +24,12 @@
         </a>
       </div>
     </div>
-    <ion-process-spinner css-class="spinner-energized" spinner="crescent" processing="vm.isLoading">
+
+    <ion-process-spinner class="col" ng-class="{'col-33 col-offset-33 spinner-align':vm.isLoading}" ngfx-bounce-in="vm.isLoading" ngfx-bounce-out="!vm.isLoading" css-class="spinner-energized" spinner="crescent" processing="vm.isLoading" ng-if="vm.centers || vm.centers.length!=0">
+
       <ion-list>
         <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
-          <img class="media-object pull-left" ng-src={{center.photoUrl}} width="80" height="80">
+          <img class="media-object pull-left" lazy-img={{center.photoUrl}} src='images/icon/centers.png' width="80" height="80">
           <h2 class="text-bold">
             {{ getTranslation(center.title, selectedLanguage) }}
           </h2>
@@ -45,9 +38,11 @@
           <i class="icon ion-arrow-right-c"></i>
         </ion-item>
       </ion-list>
+
       <div class="error_panel" ng-if="offline">
-        BUNDA
+        OFFLINE
       </div>
+
     </ion-process-spinner>
   </ion-content>
 </ion-view>

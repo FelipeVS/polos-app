@@ -5,13 +5,13 @@
   </ion-nav-buttons>
 
   <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-chatbubbles" ng-click="popover.show($event)"></button>
+    <button class="button button-icon icon ion-chatbubbles" ng-click="openLanguage($event)"></button>
   </ion-nav-buttons>
 
   <ion-content>
 
     <div id="map">
-      <leaflet lf-center="vm.mapCenter" markers="vm.markers" height="100%" width="100%"></leaflet>
+      <leaflet lf-center="vm.mapCenter" defaults="vm.defaults" markers="vm.markers" height="100%" width="100%"></leaflet>
     </div>
 
     <div id="more_info" class="subsection">

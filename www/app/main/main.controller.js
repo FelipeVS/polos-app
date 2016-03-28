@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['$scope', '$rootScope', '$filter', '$timeout', 'mapIcons', 'CentersService', 'RestaurantsService', 'NewsService', 'leafletBoundsHelpers'];
+    MainController.$inject = ['$scope', '$rootScope', '$ionicPopup', '$filter', '$timeout', 'mapIcons', 'CentersService', 'RestaurantsService', 'NewsService', 'LoadingFactory', 'leafletBoundsHelpers'];
 
     /* @ngInject */
-    function MainController($scope, $rootScope, $filter, $timeout, mapIcons, CentersService, RestaurantsService, NewsService, leafletBoundsHelpers) {
+    function MainController($scope, $rootScope, $ionicPopup, $filter, $timeout, mapIcons, CentersService, RestaurantsService, NewsService, LoadingFactory, leafletBoundsHelpers) {
         var vm = this;
         vm.mapCenter = {
             lat: -23.374004,
@@ -32,6 +32,8 @@
         vm.reorder = reorder;
         vm.mixing = false;
 
+        vm.reloadPopup = showReloadPopup;
+
         $scope.$on('leafletDirectiveMap.locationfound', function(event){
             vm.eventDetected = "LocationFound";
         });
@@ -42,13 +44,17 @@
 
         function activate() {
             vm.isLoading = true;
-
+            LoadingFactory.show();
             return CentersService.getAll().then(function(data) {
                 vm.centers = data;
                 angular.forEach(vm.centers, function(a, ind){
                   vm.centers[ind].icon = mapIcons.center;
                 })
                 vm.isLoading = false;
+                if (!vm.centers || vm.centers.length === 0 ) {
+                  showReloadPopup();
+                }
+                LoadingFactory.hide();
             });
         }
 
@@ -56,7 +62,26 @@
             CentersService.saveCenter(center);
         }
 
+        function showReloadPopup() {
+          var message = $rootScope.offline ? $filter('translate')('offline') : $filter('translate')('reload');
+
+          var alertPopup = $ionicPopup.alert({
+            title: message,
+            templateUrl: 'app/layout/popup/reload.html',
+            buttons: [
+              {
+                text: '<i class="icon ion-refresh"></i>',
+                type: 'button-energized'
+              }
+            ]
+          });
+          alertPopup.then(function(res) {
+            activate();
+          });
+        }
+
         function reorder(key) {
+            $rootScope.$emit('lazyImg:refresh');
             vm.mixing = true;
             vm.order = key;
             vm.reverse = (vm.order === key) ? !vm.reverse : false;

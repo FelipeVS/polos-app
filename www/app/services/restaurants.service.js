@@ -20,11 +20,12 @@
         return service;
 
         function getAll() {
-            var centerParam = CentersService.getCenter();
-
+            var selectedCenter = CentersService.getCenter();
+            // DEVELOPMENT
             return $http.get(serverUrl + 'restaurants', {
-                params: {center: centerParam.title.valor},
+                params: {center: selectedCenter.title.valor},
             })
+            // return $http.get(serverUrl + 'polos/' + selectedCenter.id + '/restaurantes/index.json')
               .then(getRestaurantsComplete)
               .catch(getRestaurantsFailed);
 

@@ -28,25 +28,86 @@ module.exports = function() {
     news: []
   }
   var polos = [
-    'Polo Paraty',
-    'Polo Sabores do Interior',
-    'Polo Ipiabas',
-    'Polo Lumiar & São Pedro da Serra',
-    'Polo Angra Gastronômica',
-    'Polo Orla Gastronômica',
-    'Polo Jardim Icaraí',
-    'Polo Pedra de Guaratiba',
-    'Polo Jardim Oceânico',
-    'Polo Lido',
-    'Polo Botafogo'
+    {
+      nome: 'Polo Paraty',
+      lat: -23.221053,
+      lng: -44.725117
+    },
+    {
+      nome: 'Polo Sabores do Interior',
+      lat: -21.926795,
+      lng: -42.097893
+    },
+    {
+      nome: 'Polo Ipiabas',
+      lat: -22.376677,
+      lng: -43.874947
+    },
+    {
+      nome: 'Polo Lumiar & São Pedro da Serra',
+      lat: -29.421456,
+      lng: -51.512220
+    },
+    {
+      nome: 'Polo Angra Gastronômica',
+      lat: -23.000490,
+      lng: -44.308080
+    },
+    {
+      nome: 'Polo Orla Gastronômica',
+      lat: -22.922900,
+      lng: -43.093928
+    },
+    {
+      nome: 'Polo Jardim Icaraí',
+      lat: -22.901376,
+      lng: -43.103181
+    },
+    {
+      nome: 'Polo Pedra de Guaratiba',
+      lat: -22.997980,
+      lng: -43.637198
+    },
+    {
+      nome: 'Polo Jardim Oceânico',
+      lat: -23.010688,
+      lng: -43.308543
+    },
+    {
+      nome: 'Polo Lido',
+      lat: -22.963867,
+      lng: -43.174838
+    },
+    {
+      nome: 'Polo Botafogo',
+      lat: -22.9511872,
+      lng: -43.1944118
+    },
   ]
   var centersQuantity = polos.length;
   var centersPool = [];
   createCenters();
-  var restaurantsQuantity = 150;
-  var newsQuantity = 150;
+  var restaurantsQuantity = 100;
+  var newsQuantity = 80;
+  var newsTitlePool = [
+    'Grande evento no Polo na próxima sexta',
+    'Mais um restaurante integra o nosso polo',
+    'Mercado gastronomico aquecido!',
+    'Que tal um jantar?',
+    'Vai uma pizza?',
+    'Uma visão do mercado',
+    'Turismo em alta',
+    'Domingo é dia de feira!',
+    'Evento com shows de grandes artistas',
+    'Concurso de sobremesas',
+    'Que venham os foodtrucks!',
+    'Chorinho na praça',
+    'Restaurante aposta na cultura',
+    'Restaurante unidos',
+    'Associação discute novas regras',
+  ]
 
-  // Create 150 restaurants
+  // Create 100 restaurants
   for (var i = 0; i < restaurantsQuantity; i++) {
     var number = Math.floor(Math.random() * centersQuantity) + 0;
     var center = centersPool[number];
@@ -72,7 +133,7 @@ module.exports = function() {
             }
           ]
       },
-      openHours: faker.random.number(),
+      openHours: 'Seg. a Sex. 17h as 00h. Sab, Dom e Feriados 16h as 01h',
       address: faker.address.streetAddress(),
       phone: faker.phone.phoneNumber(),
       M4T: faker.random.boolean(),
@@ -101,7 +162,7 @@ module.exports = function() {
     var instanceNews = {
       id: i,
       center: center.title.valor,
-      title: faker.name.title(),
+      title: newsTitlePool[Math.floor(Math.random() * newsTitlePool.length) + 0],
       caption: faker.lorem.sentence(),
       text: faker.lorem.paragraphs(),
       photos: photos,
@@ -119,20 +180,20 @@ module.exports = function() {
       var instance = {};
       instance.id = i;
       instance.title = {
-          valor: polos[i],
+          valor: polos[i].nome,
           idioma: 'pt-BR',
           traducoes: [
             {
-              valor: polos[i] + ' EN',
+              valor: polos[i].nome + ' EN',
               idioma: 'en',
             },
             {
-              valor: polos[i] + ' ES',
+              valor: polos[i].nome + ' ES',
               idioma: 'es',
             }
           ]
       };
-      instance.message = polos[i];
+      instance.message = polos[i].nome;
       instance.state = 'RJ';
       instance.city = faker.address.city();
       instance.neighborhoods = createNeighborhoods();
@@ -151,14 +212,14 @@ module.exports = function() {
           ]
       };
       instance.photoUrl = faker.image.image();
-      instance.openHours = faker.random.number();
+      instance.openHours = 'Seg. a Sex. 17h as 00h. Sab, Dom e Feriados 16h as 01h';
       instance.phone = faker.phone.phoneNumber();
       instance.homepage = faker.internet.url();
       instance.social = faker.internet.url();
       instance.created = faker.date.past();
       instance.updated = faker.date.past();
-      instance.lat = parseFloat(randomLat());
-      instance.lng = parseFloat(randomLng());
+      instance.lat = polos[i].lat;
+      instance.lng = polos[i].lng;
       instance.distance = faker.random.number({'min': 0.1, 'max': 352 });
       instance.restaurants = faker.random.number({'min': 1, 'max': 15});
       result.push(instance);

@@ -23,9 +23,13 @@
         ////////////////
 
         function getAll() {
-            return $http.get(serverUrl + 'centers')
+            // DEVELOPMENT
+            return $http.get('http://localhost:3000/centers/')
               .then(getCentersComplete)
               .catch(getCentersFailed);
+            // return $http.get(serverUrl + 'polos/index.json')
+            //   .then(getCentersComplete)
+            //   .catch(getCentersFailed);
 
             function getCentersComplete(response) {
                 centers = response.data;
@@ -47,7 +51,6 @@
         }
 
         function getCenter () {
-            console.log('Getting center');
             return center;
         }
 

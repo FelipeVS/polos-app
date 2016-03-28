@@ -8,7 +8,8 @@
         '720kb.fx',
         'leaflet-directive',
         'ngCordova',
-        'ionicProcessSpinner'
+        'ionicProcessSpinner',
+        'angularLazyImg'
         /* Cross-app module */
         // 'my.appModule',
 

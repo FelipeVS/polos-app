@@ -6,7 +6,8 @@
         <meta http-equiv="Content-Security-Policy" content="
         default-src
           *
-          data: ;
+          data:
+          file: ;
         script-src
           'self'
           'unsafe-inline'
@@ -57,6 +58,7 @@
         <script src="lib/leaflet/dist/leaflet-src.js"></script>
         <script src="lib/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
         <script src="lib/ionic-process-spinner/src/ionic-process-spinner.min.js"></script>
+        <script src="lib//angular-lazy-img/release/angular-lazy-img.js"></script>
 
         <script src="app/app.module.js"></script>
         <script src="app/app.config.js"></script>
@@ -80,5 +82,7 @@
         <script src="app/services/news.service.js"></script>
         <script src="app/services/restaurants.service.js"></script>
         <script src="app/services/network.monitor.service.js"></script>
+        <script src="app/services/loading.factory.js"></script>
+
     </body>
 </html>

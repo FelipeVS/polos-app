@@ -3,8 +3,10 @@
 
     angular
     .module('app.core')
-    .constant('serverUrl', 'http://localhost:3000/')
-    // .constant('serverUrl', 'http://192.168.25.15:3000/')
+    // .constant('serverUrl', 'http://localhost:3000/')
+    .constant('serverUrl', 'http://192.168.25.10:3000/')
+    // .constant('serverUrl', 'http://polos.herokuapp.com/')
+
     .constant('mapIcons', {
       center: {
           iconUrl: 'images/icon/centers.png',

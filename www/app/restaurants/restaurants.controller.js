@@ -20,6 +20,12 @@
         vm.openNavigation = openNavigation;
         vm.goToM4t = openM4t;
         vm.markers = [];
+        vm.defaults = {
+          tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          tileLayerOptions: {
+              attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          }
+        }
 
         activate();
 

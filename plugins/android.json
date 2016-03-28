@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"startApp\"><param name=\"android-package\" value=\"com.lampa.startapp.startApp\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SpinnerDialog\"><param name=\"android-package\" value=\"hu.dpal.phonegap.plugins.SpinnerDialog\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -86,6 +90,9 @@
         },
         "com.lampa.startapp": {
             "PACKAGE_NAME": "fr.loicknuchel.starter.ionic"
+        },
+        "cordova-plugin-spinner-dialog": {
+            "PACKAGE_NAME": "com.polosgourmet"
         }
     },
     "dependent_plugins": {}

@@ -1,12 +1,21 @@
-<ion-view view-title="Notícias e Eventos">
+<ion-view>
+  <ion-nav-title>
+    {{ "news_and_events" | translate }}
+  </ion-nav-title>
+
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="news in vm.news" type="item-text-wrap" href="#/tab/news/{{news.id}}" ng-click="vm.newsDetail(news)">
-        <img ng-src="{{news.photos[0]}}">
-        <h2>{{news.title}}</h2>
-        <p>{{news.caption}}</p>
-        <i class="ion-clock" ng-hide="{{!news.expire}}"> Data do evento: {{news.expire}}</i>
-
+        <img lazy-img="{{news.photos[0]}}" src="image/generic/news.jpg">
+        <h2>
+          {{news.title}}
+        </h2>
+        <p>
+          {{news.caption}}
+        </p>
+        <i class="ion-clock" ng-hide="{{!news.expire}}">
+          Data do evento: {{news.expire}}
+        </i>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>

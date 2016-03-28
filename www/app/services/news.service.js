@@ -26,29 +26,15 @@
         ////////////////
 
         function getAll() {
-            var centerParam = CentersService.getCenter();
+            var selectedCenter = CentersService.getCenter();
+
+            // DEVELOPMENT
             return $http.get(serverUrl + 'news', {
-                params: {center: centerParam.title.valor},
+                params: {center: selectedCenter.title.valor},
             })
+            // return $http.get(serverUrl + 'polos/' + selectedCenter.id + '/noticias/index.json')
               .then(getNewsComplete)
               .catch(getNewsFailed);
-
-            function getNewsComplete(response) {
-                news = response.data;
-                console.log("NEWS:", news);
-                if (news.length === 0 ) {
-                  $rootScope.hasNews = false;
-                  $cordovaToast.showShortBottom($rootScope.messages.error_no_news);
-                } else {
-                  $rootScope.hasNews = true;
-                }
-                return news;
-            }
-
-            function getNewsFailed(error) {
-                console.log('XHR Failed for getNews.' + error.data);
-                $cordovaToast.showLongTop($rootScope.messages.error_operation);
-            }
         }
 
         function getNews() {
@@ -60,7 +46,30 @@
         }
 
         function getSelected() {
+            // DEVELOPMENT
             return selectedNews;
+
+            // var selectedCenter = CentersService.getCenter();
+            // return $http.get(serverUrl + 'polos/' + selectedCenter.id + '/noticias/' + selectedNews.id + '/show.json')
+            //   .then(getNewsComplete)
+            //   .catch(getNewsFailed);
+        }
+
+        function getNewsComplete(response) {
+            news = response.data;
+            console.log("NEWS:", news);
+            if (news.length === 0 ) {
+              $rootScope.hasNews = false;
+              $cordovaToast.showShortBottom($rootScope.messages.error_no_news);
+            } else {
+              $rootScope.hasNews = true;
+            }
+            return news;
+        }
+
+        function getNewsFailed(error) {
+            console.log('XHR Failed for getNews.' + error.data);
+            $cordovaToast.showLongTop($rootScope.messages.error_operation);
         }
     }
 })();

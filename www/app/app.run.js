@@ -50,6 +50,7 @@
           startNetworkMonitor();
 
           generateLanguagePopover();
+
           // Open external links in system browser
           openBrowser();
         }
@@ -98,19 +99,19 @@
               scope: $rootScope,
               animation: 'slide-in-up'
           }).then(function(popover) {
-              $rootScope.popover = popover;
+              $rootScope.langPopover = popover;
           });
-          $rootScope.openPopover = function($event) {
-              $rootScope.popover.show($event);
-              $rootScope.popover.exists = true;
+          $rootScope.openLanguage = function($event) {
+              $rootScope.langPopover.show($event);
+              $rootScope.langPopover.exists = true;
           };
-          $rootScope.closePopover = function() {
-              $rootScope.popover.hide();
-              $rootScope.popover.exists = false;
+          $rootScope.closeLanguagePopover = function() {
+              $rootScope.langPopover.hide();
+              $rootScope.langPopover.exists = false;
           };
           $rootScope.changeLanguage = function(langKey) {
               $translate.use(langKey);
-              $rootScope.closePopover();
+              $rootScope.closeLanguagePopover();
           };
         }
 
