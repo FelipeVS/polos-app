@@ -1,10 +1,10 @@
 <ion-view view-title="{{vm.singleNews.title}}">
   <ion-content class="padding">
     <!-- THIS WILL NEED AN UPDATE AS IONIC IS UPDATED -->
-    <ion-slide-box class="slide-show" does-continue show-pager="false">
+    <ion-slide-box class="slide-show" does-continue show-pager="false" on-slide-changed="vm.updateSlide($index)">
       <ion-slide ng-repeat="photo in vm.singleNews.photos track by $index">
-        <ion-content scroll="false">
-          <img ng-src="{{photo}}">
+        <ion-content scroll="false" lazyImgContainer>
+          <img ng-src="{{photo}}" src="images/spinner-big.gif">
         </ion-content>
       </ion-slide>
     </ion-slide-box>

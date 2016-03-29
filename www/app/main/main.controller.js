@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('MainController', MainController);
 
-    MainController.$inject = ['$scope', '$rootScope', '$ionicPopup', '$filter', '$timeout', 'mapIcons', 'CentersService', 'RestaurantsService', 'NewsService', 'LoadingFactory', 'leafletBoundsHelpers'];
+    MainController.$inject = ['$scope', '$rootScope', '$ionicPopup', '$filter', '$timeout', 'mapIcons', 'CentersService', 'RestaurantsService', 'NewsService', 'leafletBoundsHelpers'];
 
     /* @ngInject */
-    function MainController($scope, $rootScope, $ionicPopup, $filter, $timeout, mapIcons, CentersService, RestaurantsService, NewsService, LoadingFactory, leafletBoundsHelpers) {
+    function MainController($scope, $rootScope, $ionicPopup, $filter, $timeout, mapIcons, CentersService, RestaurantsService, NewsService, leafletBoundsHelpers) {
         var vm = this;
         vm.mapCenter = {
             lat: -23.374004,
@@ -44,7 +44,6 @@
 
         function activate() {
             vm.isLoading = true;
-            LoadingFactory.show();
             return CentersService.getAll().then(function(data) {
                 vm.centers = data;
                 angular.forEach(vm.centers, function(a, ind){
@@ -54,7 +53,6 @@
                 if (!vm.centers || vm.centers.length === 0 ) {
                   showReloadPopup();
                 }
-                LoadingFactory.hide();
             });
         }
 

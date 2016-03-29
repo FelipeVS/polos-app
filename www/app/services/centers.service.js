@@ -24,12 +24,10 @@
 
         function getAll() {
             // DEVELOPMENT
-            return $http.get('http://localhost:3000/centers/')
+            return $http.get(serverUrl + 'centers/')
+            // return $http.get(serverUrl + 'polos/index.json')
               .then(getCentersComplete)
               .catch(getCentersFailed);
-            // return $http.get(serverUrl + 'polos/index.json')
-            //   .then(getCentersComplete)
-            //   .catch(getCentersFailed);
 
             function getCentersComplete(response) {
                 centers = response.data;

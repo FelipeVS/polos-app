@@ -29,7 +29,7 @@
 
       <ion-list>
         <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
-          <img class="media-object pull-left" lazy-img={{center.photoUrl}} src='images/icon/centers.png' width="80" height="80">
+          <img class="media-object pull-left" lazy-img="{{center.photoUrl}}" src="images/spinner.gif" width="80" height="80">
           <h2 class="text-bold">
             {{ getTranslation(center.title, selectedLanguage) }}
           </h2>

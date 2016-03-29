@@ -5,13 +5,13 @@
     .module('app.services')
     .factory('NewsService', newsService);
 
-    newsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'serverUrl', 'CentersService'];
+    newsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'LoadingFactory', 'serverUrl', 'CentersService'];
 
     // Some fake testing data
     var news = [];
 
     /* @ngInject */
-    function newsService($http, $q, $rootScope, $cordovaToast, serverUrl, CentersService) {
+    function newsService($http, $q, $rootScope, $cordovaToast, LoadingFactory, serverUrl, CentersService) {
         var service = {
             getAll: getAll,
             getNews: getNews,
@@ -26,8 +26,8 @@
         ////////////////
 
         function getAll() {
+            LoadingFactory.show(null, $rootScope.messages.loading, true);
             var selectedCenter = CentersService.getCenter();
-
             // DEVELOPMENT
             return $http.get(serverUrl + 'news', {
                 params: {center: selectedCenter.title.valor},

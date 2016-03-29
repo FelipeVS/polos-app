@@ -6,7 +6,7 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="news in vm.news" type="item-text-wrap" href="#/tab/news/{{news.id}}" ng-click="vm.newsDetail(news)">
-        <img lazy-img="{{news.photos[0]}}" src="image/generic/news.jpg">
+        <img ng-src="{{news.photos[0]}}" src="images/spinner.gif">
         <h2>
           {{news.title}}
         </h2>

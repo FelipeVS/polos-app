@@ -5,10 +5,10 @@
     .module('app.news')
     .controller('NewsController', NewsController);
 
-    NewsController.$inject = ['NewsService', 'CentersService'];
+    NewsController.$inject = ['$rootScope', 'NewsService', 'CentersService'];
 
     /* @ngInject */
-    function NewsController(NewsService, CentersService) {
+    function NewsController($rootScope, NewsService, CentersService) {
         var vm = this;
         vm.newsDetail = newsDetail;
 

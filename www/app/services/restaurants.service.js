@@ -5,10 +5,10 @@
         .module('app.services')
         .service('RestaurantsService', RestaurantsService);
 
-    RestaurantsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'serverUrl', 'CentersService'];
+    RestaurantsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'LoadingFactory', 'serverUrl', 'CentersService'];
 
     /* @ngInject */
-    function RestaurantsService($http, $q, $rootScope, $cordovaToast, serverUrl, CentersService) {
+    function RestaurantsService($http, $q, $rootScope, $cordovaToast, LoadingFactory, serverUrl, CentersService) {
 
         var service = {
             getAll: getAll,
@@ -20,6 +20,7 @@
         return service;
 
         function getAll() {
+            LoadingFactory.show(null, $rootScope.messages.loading, true);
             var selectedCenter = CentersService.getCenter();
             // DEVELOPMENT
             return $http.get(serverUrl + 'restaurants', {

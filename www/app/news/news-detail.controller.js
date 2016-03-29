@@ -5,18 +5,24 @@
     .module('app.news')
     .controller('NewsDetailController', NewsDetailController);
 
-    NewsDetailController.$inject = ['$stateParams', 'NewsService'];
+    NewsDetailController.$inject = ['$rootScope', '$stateParams', 'NewsService'];
 
     /* @ngInject */
-    function NewsDetailController($stateParams, NewsService) {
+    function NewsDetailController($rootScope, $stateParams, NewsService) {
         var vm = this;
+        vm.updateSlide = updateSlide;
+
         activate();
 
         ////////////////
 
         function activate() {
             vm.singleNews = NewsService.getSelected();
-            return;
+            $rootScope.$emit('lazyImg:refresh');
+        }
+
+        function updateSlide(index) {
+            $rootScope.$emit('lazyImg:refresh');
         }
     }
 })();
