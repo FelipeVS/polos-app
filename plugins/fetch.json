@@ -47,14 +47,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-sqlite-storage": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-storage@~0.7.14"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
@@ -71,6 +63,22 @@
         "is_top_level": true,
         "variables": {}
     },
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "source": {
+            "type": "registry",
+            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-actionsheet": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-actionsheet"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
     "cordova-plugin-x-toast": {
         "source": {
             "type": "registry",
@@ -79,10 +87,18 @@
         "is_top_level": true,
         "variables": {}
     },
-    "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+    "cordova-plugin-spinner-dialog": {
         "source": {
             "type": "registry",
-            "id": "uk.co.workingedge.phonegap.plugin.launchnavigator"
+            "id": "cordova-plugin-spinner-dialog"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-sqlite-ext": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-sqlite-ext"
         },
         "is_top_level": true,
         "variables": {}
@@ -95,11 +111,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-spinner-dialog": {
+    "cordova-sqlite-storage": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/Paldom/SpinnerDialog.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-sqlite-storage@~0.7.14"
         },
         "is_top_level": true,
         "variables": {}

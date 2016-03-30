@@ -85,18 +85,33 @@
         }
 
         function openM4t() {
-            navigator.startApp.check("com.menufortourist", function(message) { /* success */
-                navigator.startApp.start("com.menufortourist", openAppSuccess, openAppError);
-            }, function(error) {
-                console.log('Not Installed');
-                if (ionic.Platform.isIOS()) {
-                  $rootScope.openBrowser('https://itunes.apple.com/br/app/menu-for-tourist/id922644257');
-                } else if (ionic.Platform.isAndroid()){
+            if ( ionic.Platform.isAndroid() ) {
+
+              navigator.startApp.check("com.menufortourist", function(message) {
+                  navigator.startApp.start("com.menufortourist", openAppSuccess, openAppError);
+              }, function(error) {
+                  console.log('Not Installed');
                   $rootScope.openBrowser('https://play.google.com/store/apps/details?id=com.menufortourist');
-                } else {
-                  $rootScope.openBrowser('http://www.menufortourist.com')
-                }
-            });
+              });
+
+            } else if (ionic.Platform.isIOS()) {
+
+              navigator.startApp.check("menufortourist://", function(message) {
+                  navigator.startApp.start("menufortourist://", function(message) {
+                      console.log(message);
+                  },
+                  function(error) {
+                      console.log(error);
+                  });
+              },
+              function(error) {
+                  console.log('Not Installed');
+                  $rootScope.openBrowser('https://itunes.apple.com/br/app/menu-for-tourist/id922644257');
+              });
+
+            } else if (!ionic.Platform.isWebview()){
+              $rootScope.openBrowser('http://www.menufortourist.com')
+            }
 
             function openAppSuccess(message) {
               console.log(message); // => OK
@@ -104,6 +119,6 @@
             function openAppError(error) {
               console.log(error);
             }
-        }
+        } 
     }
 })();
