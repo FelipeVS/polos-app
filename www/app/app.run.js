@@ -5,18 +5,18 @@
     .module('app')
     .run(runBlock);
 
-    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite', 'NetworkMonitor'];
+    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite', 'NetworkMonitor', 'GeolocationService'];
 
-    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite, NetworkMonitor) {
+    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite, NetworkMonitor, GeolocationService) {
 
         $rootScope.getTranslation = function(object, locale, clear) {
             if (object === null || object.traducoes === null) {
                 return;
             }
-            var translation = object.valor;
+            var translation = object.text;
             for (var i = 0; i < object.traducoes.length; i++) {
-                if (object.traducoes[i].idioma.toUpperCase() == locale.toUpperCase()) {
-                    translation = object.traducoes[i].valor;
+                if (object.traducoes[i].locale.toUpperCase() == locale.toUpperCase()) {
+                    translation = object.traducoes[i].text;
                 }
             }
             if (clear) {
@@ -48,7 +48,7 @@
           }
 
           startNetworkMonitor();
-
+          startGeolocation();
           generateLanguagePopover();
 
           // Open external links in system browser
@@ -91,6 +91,9 @@
 
         function startNetworkMonitor() {
           NetworkMonitor.start();
+        }
+        function startGeolocation() {
+          GeolocationService.start();
         }
 
         function generateLanguagePopover() {

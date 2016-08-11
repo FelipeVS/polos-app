@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['$rootScope', '$state', '$cordovaLaunchNavigator', 'mapIcons', 'CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate', 'LoadingFactory'];
+    RestaurantsController.$inject = ['$rootScope', '$scope','$state', '$filter', '$timeout', '$cordovaLaunchNavigator', 'mapIcons', 'CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate', 'LoadingFactory'];
 
     /* @ngInject */
-    function RestaurantsController($rootScope, $state, $cordovaLaunchNavigator, mapIcons, CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate, LoadingFactory) {
+    function RestaurantsController($rootScope, $scope, $state, $filter, $timeout, $cordovaLaunchNavigator, mapIcons, CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate, LoadingFactory) {
         var vm = this;
 
         vm.backToCenters = backToCenters;
@@ -20,6 +20,8 @@
         vm.openNavigation = openNavigation;
         vm.goToM4t = openM4t;
         vm.markers = [];
+        vm.reorder = reorder;
+
         vm.defaults = {
           tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           tileLayerOptions: {
@@ -27,14 +29,22 @@
           }
         }
 
+        $scope.$on('location-found', function(event, args) {
+            angular.forEach(vm.markers, function (a, ind) {
+                if (a.message === "I'm here!") {
+                    a.lat= $rootScope.latitude,
+                    a.lng= $rootScope.longitude
+                }
+            })
+        });
+
         activate();
 
         ////////////////
 
         function activate() {
             vm.center = CentersService.getCenter();
-            // vm.markers[0] = vm.center;
-            // vm.markers[0].icon = mapIcons.center;
+
             vm.mapCenter = {
                 lat: vm.center.lat,
                 lng: vm.center.lng,
@@ -42,16 +52,57 @@
             }
             vm.restaurants = RestaurantsService.getRestaurants();
             angular.forEach(vm.restaurants, function(a, ind){
-              var restaurant = vm.restaurants[ind];
+              var restaurant = {
+                lat: parseFloat(vm.restaurants[ind].address.lat),
+                lng: parseFloat(vm.restaurants[ind].address.lng),
+                message: vm.restaurants[ind].name
+              };
               restaurant.icon = mapIcons.restaurant;
               vm.markers[ind] = restaurant;
             })
+
+            //Add user marker
+            vm.markers.push({
+                lat: $rootScope.latitude,
+                lng: $rootScope.longitude,
+                icon: mapIcons.user,
+                message: "I'm here!"
+            })
+            console.log('Markers', vm.markers);
             LoadingFactory.hide();LoadingFactory.hide();
         }
 
         function backToCenters() {
             // $ionicHistory.goBack();
             $state.transitionTo('main')
+        }
+
+        function reorder(key) {
+            $rootScope.$emit('lazyImg:refresh');
+
+            if (key==='name') {
+                if (!vm.nameOrderUp) {
+                  vm.nameOrderUp = true;
+                } else {
+                  vm.nameOrderUp = false;
+                }
+            } else if (key==='distance') {
+                if (!vm.distanceOrderUp) {
+                  vm.distanceOrderUp = true;
+                } else {
+                  vm.distanceOrderUp = false;
+                }
+            }
+
+            vm.orderSelected = key;
+
+            vm.mixing = true;
+            vm.order = key;
+            vm.reverse = (vm.order === key) ? !vm.reverse : false;
+            vm.restaurants = $filter('orderBy')(vm.restaurants, key, vm.reverse);
+            $timeout(function() {
+              vm.mixing = false;
+            },500)
         }
 
         function showInfo() {
@@ -77,7 +128,7 @@
 
         function openNavigation(lat, lng) {
             console.log('This will open the external navigation app')
-            $cordovaLaunchNavigator.navigate([lat,lng], null).then(function() {
+            $cordovaLaunchNavigator.navigate([lat,lng]).then(function() {
               console.log("Navigator launched");
             }, function (err) {
               console.error(err);
@@ -119,6 +170,6 @@
             function openAppError(error) {
               console.log(error);
             }
-        } 
+        }
     }
 })();

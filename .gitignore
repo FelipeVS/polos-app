@@ -54,7 +54,7 @@ platforms/
 www/lib/
 www/lib/*
 plugins
-
+plugins/*
 
 .sass-cache
 .sass-cache/*

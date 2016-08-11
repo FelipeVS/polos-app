@@ -136,7 +136,7 @@ module.exports = function() {
       openHours: 'Seg. a Sex. 17h as 00h. Sab, Dom e Feriados 16h as 01h',
       address: faker.address.streetAddress(),
       phone: faker.phone.phoneNumber(),
-      M4T: faker.random.boolean(),
+      // M4T: faker.random.boolean(),
       homepage: faker.internet.url(),
       social: faker.internet.url(),
       photoUrl: faker.image.image(),

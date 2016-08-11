@@ -41,6 +41,9 @@ $font-family-base: "Raleway", sans-serif !default;
 .text-bold {
   font-weight: 900;
 }
+.text-white-faded {
+    color: rgba(255,255,255,0.5)
+}
 .item-header {
   background-color: $energized;
   h3 {

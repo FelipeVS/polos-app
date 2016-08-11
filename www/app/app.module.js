@@ -13,10 +13,15 @@
         'app.restaurants',
         'app.news',
 
-        'app.services'
+        'app.services',
+        'app.directives'
     ]);
     angular
     .module('app.services', [
+      'app.core'
+    ]);
+    angular
+    .module('app.directives', [
       'app.core'
     ]);
 })();

@@ -1,4 +1,4 @@
-<ion-view title="{{ getTranslation(vm.center.title, selectedLanguage) }}">
+<ion-view title="{{ vm.center.name }}">
 
   <ion-nav-buttons side="left">
     <button class="button button-icon icon ion-chevron-left" ng-click="vm.backToCenters()"></button>
@@ -14,11 +14,11 @@
       <leaflet lf-center="vm.mapCenter" defaults="vm.defaults" markers="vm.markers" height="100%" width="100%"></leaflet>
     </div>
 
-    <div id="more_info" class="subsection">
+    <div id="more_info" class="subsection" ng-hide="!vm.center.openHours && !vm.center.phone && !vm.center.homepage && !vm.center.social && !vm.center.description">
       <div class="item item-divider" style="text-align:center">
         {{ "more_info" | translate }}
       </div>
-      <div class="list">
+      <div class="list" style="padding-top: 0;padding-bottom:0">
         <div class="item item-icon-left item-text-wrap" ng-if="vm.center.openHours">
           <i class="icon ion-clock"></i>
           {{vm.center.openHours}}
@@ -36,26 +36,44 @@
           {{vm.center.social}}
         </a>
 
-        <p class="description_container" ng-class="{show_more: vm.isMoreInfoShown}"  ngfx-fade-in="vm.isMoreInfoShown" ngfx-fade-out="!vm.isMoreInfoShown">
-          {{ getTranslation(vm.center.description, selectedLanguage) }}
+        <p class="description_container" ng-if="vm.center.description" ng-class="{show_more: vm.isMoreInfoShown}"  ngfx-fade-in="vm.isMoreInfoShown" ngfx-fade-out="!vm.isMoreInfoShown">
+          {{ getTranslation(vm.center.descricao, selectedLanguage) }}
         </p>
-        <button class="button button-small button-full icon" ng-class="{'ion-minus': vm.isMoreInfoShown, 'ion-plus': !vm.isMoreInfoShown }" ng-click="vm.showInfo()"></button>
+        <button class="button button-small button-full icon" style="margin-top:0;margin-bottom: 0;"ng-if="vm.center.description" ng-class="{'ion-minus': vm.isMoreInfoShown, 'ion-plus': !vm.isMoreInfoShown }" ng-click="vm.showInfo()"></button>
 
       </div>
     </div>
 
+    <div class="tabs-bar">
+      <div class="tabs" style="background-color: #f8f8f8;">
+        <!-- <div class="item item-divider">
+        <i class="icon ion-shuffle"></i>
+        </div> -->
+        <a class="tab-item item-icon-left" style="color: #444;"ng-class="{'tab-item-active': vm.order == 'name' }" ng-click="vm.reorder('name')">
+          {{ 'name' | translate }}
+          <i class="icon" ng-class="{'ion-ios-arrow-thin-down': !vm.nameOrderUp, 'ion-ios-arrow-thin-up': vm.nameOrderUp}" ng-if="vm.order==='name'"></i>
+        </a>
+        <a class="tab-item item-icon-right" style="color: #444;"ng-class="{'tab-item-active': vm.order == 'distance' }" ng-click="vm.reorder('distance')">
+          {{ 'distance' | translate }}
+          <i class="icon" ng-class="{'ion-ios-arrow-thin-down': !vm.distanceOrderUp, 'ion-ios-arrow-thin-up': vm.distanceOrderUp}" ng-if="vm.order==='distance'"></i>
+        </a>
+      </div>
+    </div>
+
   <ion-list ng-hide="vm.restaurants.length==0">
+
     <!-- ITEM HEADER -->
     <div class="list list-inset" ng-class="{'last-restaurant': $last}" ng-repeat="restaurant in vm.restaurants track by restaurant.id">
-      <div class="item-header item item-icon-right item-rounded" ng-click="vm.toggleGroup(restaurant)" ng-class="{'item-active': vm.isGroupShown(restaurant)}">
+      <div class="item-header item item-icon-right item-rounded" ng-click="vm.toggleGroup(restaurant)" ng-class="{'item-active': vm.isGroupShown(restaurant)}" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
         <img class="icon" src="images\m4t.png" style="padding:7px;" ng-hide="!restaurant.M4T">
         <h3 class="iten-text-wrap text-bold">
-          {{ restaurant.title }}
+          {{ restaurant.name }}
+          <i class="icon ion-location"></i><span class="text-white-faded" style="float:right">{{ restaurant.distance ? '('+restaurant.distance + 'km)' : null }}</span>
         </h3>
       </div>
       <!-- EXPANDABLE AREA -->
-      <div class="item item-stable item-accordion note note-rounded" ng-show="vm.isGroupShown(restaurant)" ngfx-fade-in="vm.isGroupShown(restaurant)" ngfx-fade-out="!vm.isGroupShown(restaurant)">
-        <img ng-src="{{restaurant.photoUrl}}" style="width:100%">
+      <div class="item item-stable item-accordion note note-rounded" ng-show="vm.isGroupShown(restaurant)" ngfx-fade-in="vm.isGroupShown(restaurant)" ngfx-fade-out="!vm.isGroupShown(restaurant)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
+        <img ng-src="{{restaurant.photoUrl}}" style="width:100%" ng-hide="!restaurant.photoUrl">
 
         <ion-list class="list-inset">
           <a class="item item-icon-left info-item info-alert restaurant-text item-text-wrap" href="#" ng-if="restaurant.M4T">
@@ -63,7 +81,7 @@
             {{ 'translated_menu' | translate }}
           </a>
           <ion-item class="info-item restaurant-text item-text-wrap" ng-if="restaurant.description">
-            {{ getTranslation(restaurant.description, selectedLanguage) }}
+            {{ getTranslation(restaurant.descricao, selectedLanguage) }}
           </ion-item>
           <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-if="restaurant.openHours">
             <i class="icon ion-clock"></i>
@@ -73,7 +91,7 @@
             <i class="icon ion-ios-telephone"></i>
             {{restaurant.phone}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.homepage)" ng-if="restaurant.homepage">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="openBrowser(restaurant.homepage)" ng-if="restaurant.homepage" ng-model="restaurant.homepage" http-prefix>
             <i class="icon ion-ios-home"></i>
             {{restaurant.homepage}}
           </ion-item>
@@ -81,9 +99,9 @@
             <i class="icon ion-social-facebook"></i>
             {{restaurant.social}}
           </ion-item>
-          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.lat, restaurant.lng)" ng-if="restaurant.address">
+          <ion-item class="item-icon-left info-item restaurant-text item-text-wrap" ng-click="vm.openNavigation(restaurant.address.lat, restaurant.address.lng)" ng-if="restaurant.address">
             <i class="icon ion-location"></i>
-            {{restaurant.address}}
+            {{restaurant.address.street + ', ' + restaurant.address.number + ', ' + restaurant.address.neighbourhood + ' - ' + restaurant.address.city }}
           </ion-item>
         </ion-list>
 

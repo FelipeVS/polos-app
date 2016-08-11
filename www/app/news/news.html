@@ -1,22 +1,34 @@
-<ion-view>
-  <ion-nav-title>
-    {{ "news_and_events" | translate }}
-  </ion-nav-title>
+<ion-view title="{{ 'news_and_events' | translate }}">
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-chevron-left" ng-click="vm.backToCenters()"></button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-chatbubbles" ng-click="openLanguage($event)"></button>
+  </ion-nav-buttons>
 
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="news in vm.news" type="item-text-wrap" href="#/tab/news/{{news.id}}" ng-click="vm.newsDetail(news)">
-        <img ng-src="{{news.photos[0]}}" src="images/spinner.gif">
+        <img ng-src="{{news.photoUrl[0]}}" src="images/spinner.gif" ng-if="news.photoUrl">
+        <img src="images/generic/no-photo.png" ng-if="!news.photoUrl">
         <h2>
-          {{news.title}}
+          {{news.titulo}}
         </h2>
         <p>
-          {{news.caption}}
+          {{news.subtitulo}}
         </p>
         <i class="ion-clock" ng-hide="{{!news.expire}}">
           Data do evento: {{news.expire}}
         </i>
         <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+      <ion-item class="item-icon-left" ng-if="vm.news.length==0" disabled>
+          <h2>
+              {{messages.error_no_news | translate}}
+          </h2>
+          <i class="icon ion-sad-outline"></i>
       </ion-item>
     </ion-list>
   </ion-content>

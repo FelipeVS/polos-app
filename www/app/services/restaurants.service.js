@@ -5,10 +5,10 @@
         .module('app.services')
         .service('RestaurantsService', RestaurantsService);
 
-    RestaurantsService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'LoadingFactory', 'serverUrl', 'CentersService'];
+    RestaurantsService.$inject = ['$http', '$q', '$rootScope', 'ToastFactory', 'LoadingFactory', 'serverUrl', 'CentersService'];
 
     /* @ngInject */
-    function RestaurantsService($http, $q, $rootScope, $cordovaToast, LoadingFactory, serverUrl, CentersService) {
+    function RestaurantsService($http, $q, $rootScope, ToastFactory, LoadingFactory, serverUrl, CentersService) {
 
         var service = {
             getAll: getAll,
@@ -20,13 +20,11 @@
         return service;
 
         function getAll() {
-            LoadingFactory.show(null, $rootScope.messages.loading, true);
             var selectedCenter = CentersService.getCenter();
-            // DEVELOPMENT
-            return $http.get(serverUrl + 'restaurants', {
-                params: {center: selectedCenter.title.valor},
+
+            return $http.get(serverUrl + 'polos/' + selectedCenter.id + '/restaurantes/index.json', {
+              params: {lat: $rootScope.latitude, lng: $rootScope.longitude},
             })
-            // return $http.get(serverUrl + 'polos/' + selectedCenter.id + '/restaurantes/index.json')
               .then(getRestaurantsComplete)
               .catch(getRestaurantsFailed);
 
@@ -34,14 +32,16 @@
                 restaurants = response.data;
                 console.log("RESTAURANTS: ", restaurants);
                 if (restaurants.length ===0 ) {
-                  $cordovaToast.showShortBottom($rootScope.messages.error_no_restaurants);
+                  ToastFactory.show($rootScope.messages.error_no_restaurants, 'short', 'bottom');
                 }
+                LoadingFactory.hide();
                 return restaurants;
             }
 
             function getRestaurantsFailed(error) {
                 console.log('XHR Failed for getRestaurants.' + error.data);
-                $cordovaToast.showLongBottom($rootScope.messages.error_operation);
+                ToastFactory.show($rootScope.messages.error_no_restaurants, 'long', 'bottom');
+                LoadingFactory.hide();
             }
         }
 
