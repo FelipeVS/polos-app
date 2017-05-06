@@ -5,18 +5,18 @@
     .module('app')
     .run(runBlock);
 
-    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite', 'NetworkMonitor'];
+    runBlock.$inject = ['$rootScope', '$ionicPlatform', '$ionicPopover', '$translate', '$cordovaSQLite', 'NetworkMonitor', 'GeolocationService'];
 
-    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite, NetworkMonitor) {
+    function runBlock($rootScope, $ionicPlatform, $ionicPopover, $translate, $cordovaSQLite, NetworkMonitor, GeolocationService) {
 
         $rootScope.getTranslation = function(object, locale, clear) {
             if (object === null || object.traducoes === null) {
                 return;
             }
-            var translation = object.valor;
+            var translation = object.text;
             for (var i = 0; i < object.traducoes.length; i++) {
-                if (object.traducoes[i].idioma.toUpperCase() == locale.toUpperCase()) {
-                    translation = object.traducoes[i].valor;
+                if (object.traducoes[i].locale.toUpperCase() == locale.toUpperCase()) {
+                    translation = object.traducoes[i].text;
                 }
             }
             if (clear) {
@@ -41,14 +41,14 @@
               // org.apache.cordova.statusbar required
               StatusBar.styleLightContent();
           }
-          if (window.sqlitePlugin) {
-              initiateSQLite();
-          }
+        //   if (window.sqlitePlugin) {
+        //       initiateSQLite();
+        //   }
           if (ionic.Platform.isWebView()) {
           }
 
           startNetworkMonitor();
-
+          startGeolocation();
           generateLanguagePopover();
 
           // Open external links in system browser
@@ -78,19 +78,23 @@
           });
         }
 
-        function initiateSQLite() {
-            var db = $cordovaSQLite.openDB({name: "config.db", location: 2}, successcb, errorcb);
-        }
+        // function initiateSQLite() {
+        //     var db = $cordovaSQLite.openDB({name: "config.db", location: 2}, successcb, errorcb);
+        // }
 
-        function successcb() {
-          console.log('Succsess');
-        }
-        function errorcb() {
-          console.log('Error!');
-        }
+        // function successcb() {
+        //   console.log('Succsess');
+        // }
+        // function errorcb() {
+        //   console.log('Error!');
+        // }
 
         function startNetworkMonitor() {
           NetworkMonitor.start();
+
+        }
+        function startGeolocation() {
+          GeolocationService.start();
         }
 
         function generateLanguagePopover() {

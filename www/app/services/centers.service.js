@@ -5,12 +5,12 @@
     .module('app.services')
     .factory('CentersService', centersService);
 
-    centersService.$inject = ['$http', '$q', '$rootScope', '$cordovaToast', 'serverUrl'];
+    centersService.$inject = ['$http', '$q', '$rootScope', 'ToastFactory', 'serverUrl'];
 
     var centers = [];
 
     /* @ngInject */
-    function centersService($http, $q, $rootScope, $cordovaToast, serverUrl) {
+    function centersService($http, $q, $rootScope, ToastFactory, serverUrl) {
         var service = {
             getAll: getAll,
             saveCenter: saveCenter,
@@ -23,28 +23,25 @@
         ////////////////
 
         function getAll() {
-            // DEVELOPMENT
-            return $http.get(serverUrl + 'centers/')
-            // return $http.get(serverUrl + 'polos/index.json')
+            return $http.get(serverUrl + 'polos/index.json')
               .then(getCentersComplete)
               .catch(getCentersFailed);
 
             function getCentersComplete(response) {
                 centers = response.data;
                 if (centers === 0 ) {
-                  $cordovaToast.showLongBottom($rootScope.messages.error_operation);
+                  ToastFactory.show($rootScope.messages.error_operation, 'short', 'bottom');
                 }
                 return centers;
             }
 
             function getCentersFailed(error) {
                 console.log('XHR Failed for getCenters.' + error.data);
-                $cordovaToast.showLongBottom($rootScope.messages.error_operation);
+                ToastFactory.show($rootScope.messages.error_operation, 'long', 'bottom');
             }
         }
 
         function saveCenter (selected) {
-            console.log('Saving center to later:', selected);
             center = selected;
         }
 

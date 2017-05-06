@@ -5,10 +5,10 @@
     .module('app.main')
     .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['$rootScope', '$state', '$cordovaLaunchNavigator', 'mapIcons', 'CentersService', 'RestaurantsService', '$ionicHistory', '$ionicScrollDelegate', 'LoadingFactory'];
+    RestaurantsController.$inject = ['$rootScope', '$scope','$state', '$filter', '$timeout', '$cordovaLaunchNavigator', 'mapIcons', 'CentersService', 'RestaurantsService', '$ionicHistory', '$location', '$ionicScrollDelegate', 'LoadingFactory'];
 
     /* @ngInject */
-    function RestaurantsController($rootScope, $state, $cordovaLaunchNavigator, mapIcons, CentersService, RestaurantsService, $ionicHistory, $ionicScrollDelegate, LoadingFactory) {
+    function RestaurantsController($rootScope, $scope, $state, $filter, $timeout, $cordovaLaunchNavigator, mapIcons, CentersService, RestaurantsService, $ionicHistory, $location, $ionicScrollDelegate, LoadingFactory) {
         var vm = this;
 
         vm.backToCenters = backToCenters;
@@ -20,12 +20,48 @@
         vm.openNavigation = openNavigation;
         vm.goToM4t = openM4t;
         vm.markers = [];
+        vm.reorder = reorder;
+
         vm.defaults = {
           tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           tileLayerOptions: {
               attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           }
         }
+        vm.events = {
+            map: {
+              enable: ['locationfound', 'click'],
+              logic: 'emit'
+            },
+            markers: {
+                enable: ['click'],
+                logic: 'emit'
+            }
+        }
+
+        // Map events
+        $scope.$on('leafletDirectiveMarker.restaurantsMap.click', function(e, args) {
+            vm.shownGroup = vm.restaurants[args.model.index]
+            // angular.forEach(vm.restaurants, function (restaurant, index) {
+            //     restaurant.selected = false;
+            // })
+            // if (vm.restaurants[args.model.index]) vm.restaurants[args.model.index]['selected'] = true;
+            $location.hash('restaurant'+(args.model.index));
+            $ionicScrollDelegate.anchorScroll(true);
+        });
+        // $scope.$on('leafletDirectiveMap.restaurantsMap.click', function(e, args) {
+        //     angular.forEach(vm.restaurants, function (restaurant, index) {
+        //         restaurant.selected = false;
+        //     })
+        // });
+        $scope.$on('location-found', function(event, args) {
+            angular.forEach(vm.markers, function (a, ind) {
+                if (a.message === "I'm here!") {
+                    a.lat = $rootScope.latitude;
+                    a.lng = $rootScope.longitude;
+                }
+            })
+        });
 
         activate();
 
@@ -33,18 +69,29 @@
 
         function activate() {
             vm.center = CentersService.getCenter();
-            // vm.markers[0] = vm.center;
-            // vm.markers[0].icon = mapIcons.center;
             vm.mapCenter = {
-                lat: vm.center.lat,
-                lng: vm.center.lng,
+                lat: vm.center.address ? parseFloat(vm.center.address.lat) : $rootScope.latitude,
+                lng: vm.center.address ? parseFloat(vm.center.address.lng) : $rootScope.longitude,
                 zoom: 14
             }
             vm.restaurants = RestaurantsService.getRestaurants();
             angular.forEach(vm.restaurants, function(a, ind){
-              var restaurant = vm.restaurants[ind];
+              var restaurant = {
+                "lat": parseFloat(vm.restaurants[ind].address.lat),
+                "lng": parseFloat(vm.restaurants[ind].address.lng),
+                "message": vm.restaurants[ind].name,
+                "index" : ind
+              };
               restaurant.icon = mapIcons.restaurant;
-              vm.markers[ind] = restaurant;
+              vm.markers.push(restaurant)
+            })
+
+            //Add user marker
+            vm.markers.push({
+                lat: $rootScope.latitude,
+                lng: $rootScope.longitude,
+                icon: mapIcons.user,
+                message: "I'm here!"
             })
             LoadingFactory.hide();LoadingFactory.hide();
         }
@@ -52,6 +99,34 @@
         function backToCenters() {
             // $ionicHistory.goBack();
             $state.transitionTo('main')
+        }
+
+        function reorder(key) {
+            $rootScope.$emit('lazyImg:refresh');
+
+            if (key==='name') {
+                if (!vm.nameOrderUp) {
+                  vm.nameOrderUp = true;
+                } else {
+                  vm.nameOrderUp = false;
+                }
+            } else if (key==='distance') {
+                if (!vm.distanceOrderUp) {
+                  vm.distanceOrderUp = true;
+                } else {
+                  vm.distanceOrderUp = false;
+                }
+            }
+
+            vm.orderSelected = key;
+
+            vm.mixing = true;
+            vm.order = key;
+            vm.reverse = (vm.order === key) ? !vm.reverse : false;
+            vm.restaurants = $filter('orderBy')(vm.restaurants, key, vm.reverse);
+            $timeout(function() {
+              vm.mixing = false;
+            },500)
         }
 
         function showInfo() {
@@ -77,7 +152,7 @@
 
         function openNavigation(lat, lng) {
             console.log('This will open the external navigation app')
-            $cordovaLaunchNavigator.navigate([lat,lng], null).then(function() {
+            $cordovaLaunchNavigator.navigate([lat,lng]).then(function() {
               console.log("Navigator launched");
             }, function (err) {
               console.error(err);
@@ -119,6 +194,6 @@
             function openAppError(error) {
               console.log(error);
             }
-        } 
+        }
     }
 })();

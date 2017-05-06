@@ -4,8 +4,13 @@
   </ion-nav-buttons>
 
   <ion-content lazyImgContainer has-bouncing="false">
-    <div id="map">
-      <leaflet lf-center="vm.mapCenter" markers="vm.centers" defaults="vm.defaults" event-broadcast="vm.events" height="100%" width="100%"></leaflet>
+
+    <div class="error_panel" ng-if="vm.isOnline">
+        OFFLINE
+    </div>
+
+    <div id="map" data-tap-disabled="true">
+      <leaflet id="centersMap" lf-center="vm.mapCenter" markers="vm.markers" defaults="vm.defaults" event-broadcast="vm.events" height="100%" width="100%"></leaflet>
     </div>
 
     <div class="tabs-bar">
@@ -13,36 +18,34 @@
         <!-- <div class="item item-divider">
         <i class="icon ion-shuffle"></i>
         </div> -->
-        <a class="tab-item" ng-click="vm.reorder('name')">
+        <a class="tab-item" ng-class="{'item-icon-right': vm.orderSelected == 'name' }" ng-click="vm.reorder('name')">
           {{ 'name' | translate }}
+          <i class="icon" ng-if="vm.orderSelected" ng-class="{'ion-ios-arrow-thin-down': !vm.orderUp, 'ion-ios-arrow-thin-up': vm.orderUp}"></i>
         </a>
-        <a class="tab-item" ng-click="vm.reorder('distance')">
+        <!-- <a class="tab-item" ng-class="{'dark': vm.orderSelected == 'distance' }" ng-click="vm.reorder('distance')">
           {{ 'distance' | translate }}
         </a>
-        <a class="tab-item" ng-click="vm.reorder('restaurants')">
+        <a class="tab-item" ng-class="{'dark': vm.orderSelected == 'restaurants' }" ng-click="vm.reorder('restaurants')">
           {{ 'restaurants' | translate }}
-        </a>
+        </a> -->
       </div>
     </div>
 
     <ion-process-spinner class="col" ng-class="{'col-33 col-offset-33 spinner-align':vm.isLoading}" ngfx-bounce-in="vm.isLoading" ngfx-bounce-out="!vm.isLoading" css-class="spinner-energized" spinner="crescent" processing="vm.isLoading" ng-if="vm.centers || vm.centers.length!=0">
 
       <ion-list>
-        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing">
-          <img class="media-object pull-left" lazy-img="{{center.photoUrl}}" src="images/spinner.gif" width="80" height="80">
+        <ion-item id="center{{$index}}" class="item-thumbnail-left item-icon-right" ng-repeat="center in vm.centers track by center.id" href="#/tab/restaurants/{{center.id}}" ng-click="vm.saveCenter(center)" ngfx-bounce-in="vm.mixing" ngfx-bounce-out="!vm.mixing" ng-class="{'active': center.selected}">
+          <img class="media-object pull-left" lazy-img="{{center.photoUrl}}" src="images/spinner.gif" width="80" height="80" ng-if="center.photoUrl">
+          <img class="media-object pull-left" src="images/generic/no-photo.png" width="80" height="80" ng-if="!center.photoUrl">
+
           <h2 class="text-bold">
-            {{ getTranslation(center.title, selectedLanguage) }}
+            {{ center.name }}
           </h2>
-          <i class="ion-location"></i> {{center.distance}} km
-          <span class="badge badge-assertive"> {{center.restaurants}} </span>
+          <!-- <i class="ion-location"></i> {{center.distance}} km
+          <span class="badge badge-assertive"> {{center.restaurants}} </span> -->
           <i class="icon ion-arrow-right-c"></i>
         </ion-item>
       </ion-list>
-
-      <div class="error_panel" ng-if="offline">
-        OFFLINE
-      </div>
-
     </ion-process-spinner>
   </ion-content>
 </ion-view>
