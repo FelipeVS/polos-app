@@ -65,6 +65,20 @@
             })
         });
 
+        $scope.$on('leafletDirectiveMarker.click', function(e, args) {
+           // Args will contain the marker name and other relevant information
+           console.log(e, args);
+       });
+
+        $scope.$on('location-found', function(event, args) {
+            angular.forEach(vm.markers, function (a, ind) {
+                if (a.message === "I'm here!") {
+                    a.lat= $rootScope.latitude,
+                    a.lng= $rootScope.longitude
+                }
+            })
+        });
+
         activate();
 
         ////////////////

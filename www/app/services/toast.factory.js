@@ -22,7 +22,7 @@
             }
 
             if (!ionic.Platform.isWebView()) {
-              console.log(message)
+              console.log(duration, position, message)
             } else {
               $cordovaToast.show(message, duration, position)
             }

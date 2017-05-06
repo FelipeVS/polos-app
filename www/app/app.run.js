@@ -96,6 +96,9 @@
         function startGeolocation() {
           GeolocationService.start();
         }
+        function startGeolocation() {
+          GeolocationService.start();
+        }
 
         function generateLanguagePopover() {
           // .fromTemplateUrl() method
